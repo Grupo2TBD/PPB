@@ -13,7 +13,6 @@ dependencies{
 	compile 'javax:javaee-web-api:6.0'
 	compile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
 	compile 'mysql:mysql-connector-java:5.1.30'
-       // compile 'name:commons-codec-1.10'
 }
 
 sourceSets.all {

@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1"
-	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="customerPU" transaction-type="JTA">
-		<jta-data-source>jdbc/test-angular</jta-data-source>
-		<class>model.Customer</class>
-	</persistence-unit>
-
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="ian" transaction-type="JTA">
+    <jta-data-source>PPB</jta-data-source>
+    <class>model.TipoClasificacion</class>
+    <class>model.ComentarioFotografia</class>
+    <class>model.Seguidor</class>
+    <class>model.FavoritoAlbum</class>
+    <class>model.Tag</class>
+    <class>model.ComentarioAlbum</class>
+    <class>model.Camara</class>
+    <class>model.PermisoAlbum</class>
+    <class>model.Privacidad</class>
+    <class>model.Exif</class>
+    <class>model.FavoritoFotografia</class>
+    <class>model.AlbumFotografia</class>
+    <class>model.Usuario</class>
+    <class>model.Localizacion</class>
+    <class>model.PermisoFotografia</class>
+    <class>model.Fotografia</class>
+    <class>model.Album</class>
+  </persistence-unit>
 </persistence>

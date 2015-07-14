@@ -2,19 +2,10 @@ package facade;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-/**
- * 
- * @author rvasquez
- *
- * @param <T>
- */
+
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
-    
-    enum Hola{
-    	
-    }
-
+  
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
@@ -36,6 +27,8 @@ public abstract class AbstractFacade<T> {
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
     }
+    
+    
 
     public List<T> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
