@@ -12,20 +12,13 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import facade.UsuarioEJBFacade;
-import java.text.ParseException;
 import model.Usuario;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Stateless  
 public class LoginEJB implements LoginEJBLocal{
 
     @EJB
     UsuarioEJBFacade userFacade;
-    
-    public LoginEJB(){
-    
-    }
     
     
     @Override

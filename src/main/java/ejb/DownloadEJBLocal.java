@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package ejb;
 
-import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
 
 /**
  *
  * @author ian
  */
-@Path("/PhotosFrom")
-public class PhotosFromService {
-    
+public interface DownloadEJBLocal {
+    Response DownloadPhoto(String id);
 }

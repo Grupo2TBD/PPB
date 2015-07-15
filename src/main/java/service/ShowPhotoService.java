@@ -5,7 +5,12 @@
  */
 package service;
 
+import ejb.DownloadEJBLocal;
+import javax.ejb.EJB;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -13,5 +18,16 @@ import javax.ws.rs.Path;
  */
 @Path("/Photo")
 public class ShowPhotoService {
+    @EJB
+    DownloadEJBLocal downloadEJB;
+    
+   
+    @GET
+    @Path("/Download")
+    @Produces("image/png")
+    public Response download(){
+        String id="oli.png";
+        return downloadEJB.DownloadPhoto(id);
+    }
     
 }

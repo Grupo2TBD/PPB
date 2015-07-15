@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
-
-import javax.ws.rs.Path;
+package ejb;
 
 /**
  *
  * @author ian
  */
-@Path("/MyPhotos")
-public class MyPhotosService {
-    
+public class GlobalVariables {
+    public static String photoPath="/home/ian/Escritorio/img/";
 }
