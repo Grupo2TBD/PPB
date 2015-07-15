@@ -9,7 +9,8 @@ FUNCIONES:
 -LoginService(String mail, String pass)->JSON
 PENDIENTE:
 -Encriptar contraseña (se debe añadir jar)
-
+-Recordar enviar id de usuario
+------------------------------------------------------------------------------------------------------------------------------------------------------
 
 2->Registro
 +Descripción:
@@ -23,7 +24,7 @@ Se responde "si" o "no"
 	NO: Angular redirige a página de registro indicando error.
 FUNCIONES:
 -Registro()->JSON
-
+----------------------------------------------------------------------------------------------------------------------------------------------------
 
 3->Vista Fotografía
 +Descripción

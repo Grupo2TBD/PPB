@@ -25,7 +25,7 @@ public class LoginService {
     LoginEJBLocal loginEJB;
     
     
-    @GET
+    @GET//@POST
     @Produces({"application/json"})
     public String registro(){
         return loginEJB.Login("akjfosj@sacql.cl","pass");

@@ -10,6 +10,7 @@ import java.util.List;
 import model.Usuario;
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
@@ -24,18 +25,11 @@ public class RegistroService {
     RegistroEJBLocal registroEJB;
     
     
-    @GET
+    @GET//POST
     @Produces({"application/json"})
-    public List<Usuario> registro(){
-        return registroEJB.get();
-    }
-    
-    @GET
-    @Path("/new")
-    @Produces({"application/json"})
-    public String stro(){
+    public String registro(){
         
-        return registroEJB.Registro("akjfosj@sacql.cl","name", "lastname", "pass","23/06/1994","f","yo");
+        return registroEJB.Registro("ian@tbd.cl","ian", "lastname", "pass","23/06/1994","f","gatoconbotas");
     }
     
 }
