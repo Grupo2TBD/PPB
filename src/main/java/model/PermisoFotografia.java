@@ -11,11 +11,9 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -50,10 +48,7 @@ public class PermisoFotografia implements Serializable {
     private Boolean candownloadphoto;
     @Column(name = "CANFAVORITEPHOTO")
     private Boolean canfavoritephoto;
-    @JoinTable(name = "FOTOGRAFIA_PERMISO", joinColumns = {
-        @JoinColumn(name = "ID_PERMISO_FOTOGRAFIA", referencedColumnName = "ID_PERMISO_FOTOGRAFIA")}, inverseJoinColumns = {
-        @JoinColumn(name = "ID_PHOTO", referencedColumnName = "ID_PHOTO")})
-    @ManyToMany
+    @OneToMany(mappedBy = "idPermisoFotografia")
     private Collection<Fotografia> fotografiaCollection;
 
     public PermisoFotografia() {

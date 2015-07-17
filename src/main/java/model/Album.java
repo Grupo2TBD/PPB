@@ -14,8 +14,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -74,11 +72,6 @@ public class Album implements Serializable {
     @Column(name = "ULTIMA_ACTUALIZACION_ALBUM")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ultimaActualizacionAlbum;
-    @JoinTable(name = "ALBUM_PERMISO", joinColumns = {
-        @JoinColumn(name = "ID_ALBUM", referencedColumnName = "ID_ALBUM")}, inverseJoinColumns = {
-        @JoinColumn(name = "ID_PERMISO_ALBUM", referencedColumnName = "ID_PERMISO_ALBUM")})
-    @ManyToMany
-    private Collection<PermisoAlbum> permisoAlbumCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
     private Collection<FavoritoAlbum> favoritoAlbumCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
@@ -88,6 +81,9 @@ public class Album implements Serializable {
     @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER")
     @ManyToOne(optional = false)
     private Usuario idUser;
+    @JoinColumn(name = "ID_PERMISO_ALBUM", referencedColumnName = "ID_PERMISO_ALBUM")
+    @ManyToOne
+    private PermisoAlbum idPermisoAlbum;
     @JoinColumn(name = "ID_PRIVACIDAD", referencedColumnName = "ID_PRIVACIDAD")
     @ManyToOne(optional = false)
     private Privacidad idPrivacidad;
@@ -172,15 +168,6 @@ public class Album implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PermisoAlbum> getPermisoAlbumCollection() {
-        return permisoAlbumCollection;
-    }
-
-    public void setPermisoAlbumCollection(Collection<PermisoAlbum> permisoAlbumCollection) {
-        this.permisoAlbumCollection = permisoAlbumCollection;
-    }
-
-    @XmlTransient
     public Collection<FavoritoAlbum> getFavoritoAlbumCollection() {
         return favoritoAlbumCollection;
     }
@@ -213,6 +200,14 @@ public class Album implements Serializable {
 
     public void setIdUser(Usuario idUser) {
         this.idUser = idUser;
+    }
+
+    public PermisoAlbum getIdPermisoAlbum() {
+        return idPermisoAlbum;
+    }
+
+    public void setIdPermisoAlbum(PermisoAlbum idPermisoAlbum) {
+        this.idPermisoAlbum = idPermisoAlbum;
     }
 
     public Privacidad getIdPrivacidad() {

@@ -101,8 +101,6 @@ public class Fotografia implements Serializable {
     private Collection<Tag> tagCollection;
     @ManyToMany(mappedBy = "fotografiaCollection")
     private Collection<Usuario> usuarioCollection;
-    @ManyToMany(mappedBy = "fotografiaCollection")
-    private Collection<PermisoFotografia> permisoFotografiaCollection;
     @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER")
     @ManyToOne(optional = false)
     private Usuario idUser;
@@ -115,6 +113,9 @@ public class Fotografia implements Serializable {
     @JoinColumn(name = "ID_PRIVACIDAD", referencedColumnName = "ID_PRIVACIDAD")
     @ManyToOne(optional = false)
     private Privacidad idPrivacidad;
+    @JoinColumn(name = "ID_PERMISO_FOTOGRAFIA", referencedColumnName = "ID_PERMISO_FOTOGRAFIA")
+    @ManyToOne
+    private PermisoFotografia idPermisoFotografia;
     @JoinColumn(name = "ID_TIPO_CLASIFICACION", referencedColumnName = "ID_TIPO_CLASIFICACION")
     @ManyToOne
     private TipoClasificacion idTipoClasificacion;
@@ -272,15 +273,6 @@ public class Fotografia implements Serializable {
         this.usuarioCollection = usuarioCollection;
     }
 
-    @XmlTransient
-    public Collection<PermisoFotografia> getPermisoFotografiaCollection() {
-        return permisoFotografiaCollection;
-    }
-
-    public void setPermisoFotografiaCollection(Collection<PermisoFotografia> permisoFotografiaCollection) {
-        this.permisoFotografiaCollection = permisoFotografiaCollection;
-    }
-
     public Usuario getIdUser() {
         return idUser;
     }
@@ -311,6 +303,14 @@ public class Fotografia implements Serializable {
 
     public void setIdPrivacidad(Privacidad idPrivacidad) {
         this.idPrivacidad = idPrivacidad;
+    }
+
+    public PermisoFotografia getIdPermisoFotografia() {
+        return idPermisoFotografia;
+    }
+
+    public void setIdPermisoFotografia(PermisoFotografia idPermisoFotografia) {
+        this.idPermisoFotografia = idPermisoFotografia;
     }
 
     public TipoClasificacion getIdTipoClasificacion() {
