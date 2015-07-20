@@ -40,31 +40,35 @@ public class RegistroEJB implements RegistroEJBLocal{
     @Override
         public void insertaUsuario(String mail, String name, String lastname, String pass, String date, String sex, String alias){
            Usuario user = new Usuario();
-           RecurrentesEJB f=new RecurrentesEJB();
+           RecurrentesEJB fecha=new RecurrentesEJB();
             user.setEmailUser(mail);
             user.setNombreRealUser(name);
             user.setApellidoUser(lastname);
             user.setPassUser(pass);
             user.setAliasUser(alias);
         try {
-            user.setFechaCumpleanosUser(f.FechaAngularToJava(date));
+            user.setFechaCumpleanosUser(fecha.FechaAngularToJava(date));
         } catch (ParseException ex) {
             Logger.getLogger(RegistroEJB.class.getName()).log(Level.SEVERE, null, ex);
         }
-            user.setFechaCreacionCuenta(f.fechaActual());
-            user.setFechaUltimaActualizacion(f.fechaActual());
+            user.setFechaCreacionCuenta(fecha.fechaActual());
+            user.setFechaUltimaActualizacion(fecha.fechaActual());
             user.setSexoUser(sex);
             user.setCantidadAlbumesCreados(0);
             user.setCantidadFotografiasSubidas(0);
             user.setCantidadSeguidores(0);
             user.setCantidadSeguidos(0);
-           this.userFacade.create(user);
-            
+            user.setDireccionFotoPerfilUser("perfil");
+            user.setDireccionFotoPortadaUser("portada");
+            this.userFacade.create(user);
         }    
     
+    
+        
     @Override
     public String Registro(String mail, String name, String lastname, String pass, String date, String sex, String alias){
         List <Usuario> list =this.userFacade.findAll();
+        
             int largo=list.size();
             int contador=0;
             while(largo!=0){
@@ -74,8 +78,10 @@ public class RegistroEJB implements RegistroEJBLocal{
                 largo--;
                 contador++;
             }
-            insertaUsuario(mail,name,lastname,pass,date,sex,alias);
-            return "ship";
-      }
+        AlbumEJB album = new AlbumEJB();    
+        insertaUsuario(mail,name,lastname,pass,date,sex,alias);
+        album.insertaAlbumDefault();
+        return "ship";
+    }
              
 }

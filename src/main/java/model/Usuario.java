@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -22,7 +24,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -56,8 +57,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID_USER")
     private Integer idUser;
     @Size(max = 20)
@@ -109,7 +110,7 @@ public class Usuario implements Serializable {
         @JoinColumn(name = "ID_PHOTO", referencedColumnName = "ID_PHOTO")})
     @ManyToMany
     private Collection<Fotografia> fotografiaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
+    @OneToMany(mappedBy = "idUser")
     private Collection<Fotografia> fotografiaCollection1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Collection<FavoritoAlbum> favoritoAlbumCollection;
@@ -119,7 +120,7 @@ public class Usuario implements Serializable {
     private Collection<ComentarioAlbum> comentarioAlbumCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Collection<FavoritoFotografia> favoritoFotografiaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
+    @OneToMany(mappedBy = "idUser")
     private Collection<Album> albumCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Collection<Seguidor> seguidorCollection;

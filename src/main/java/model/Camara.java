@@ -69,7 +69,7 @@ public class Camara implements Serializable {
     private Integer pesoCamara;
     @Column(name = "CANTIDAD_FOTOGRAFIAS_CAMARA")
     private Integer cantidadFotografiasCamara;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCamara")
+    @OneToMany(mappedBy = "idCamara")
     private Collection<Fotografia> fotografiaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "camara")
     private Collection<Exif> exifCollection;

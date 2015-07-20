@@ -18,14 +18,15 @@ import model.Fotografia;
 public class UploadEJB implements UploadEJBLocal{
     @EJB
     FotografiaEJBFacade photoFacade;
-    RecurrentesEJBLocal fechas;
     
     @Override
     public void insertPhotoInfo(int idUser, int idPrivacidad, String title, String description,String format){
         Fotografia foto=new Fotografia();
+        RecurrentesEJB fecha=new RecurrentesEJB();
         foto.setTituloPhoto(title);
         foto.setDescripcionPhoto(description);
-        foto.setFechaSubidaPhoto(fechas.fechaActual());
+        foto.setFechaSubidaPhoto(fecha.fechaActual());
         foto.setFormatoPhoto(format);
+        this.photoFacade.create(foto);
     }
 }

@@ -20,5 +20,6 @@ public interface RegistroEJBLocal {
     Usuario test();
     String Registro(String mail, String name, String lastname, String pass, String date, String sex, String alias);
     void insertaUsuario(String mail, String name, String lastname, String pass, String date, String sex, String alias);
+   
 }
 

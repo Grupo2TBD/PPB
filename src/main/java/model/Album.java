@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,7 +23,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -47,8 +48,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Album implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID_ALBUM")
     private Integer idAlbum;
     @Size(max = 20)
@@ -79,13 +80,13 @@ public class Album implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAlbum")
     private Collection<ComentarioAlbum> comentarioAlbumCollection;
     @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Usuario idUser;
     @JoinColumn(name = "ID_PERMISO_ALBUM", referencedColumnName = "ID_PERMISO_ALBUM")
     @ManyToOne
     private PermisoAlbum idPermisoAlbum;
     @JoinColumn(name = "ID_PRIVACIDAD", referencedColumnName = "ID_PRIVACIDAD")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Privacidad idPrivacidad;
 
     public Album() {

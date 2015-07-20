@@ -15,15 +15,15 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import model.Fotografia;
+import model.Album;
 
 @Stateless
-public class FotografiaEJBFacade extends AbstractFacade<Fotografia>{
+public class AlbumEJBFacade extends AbstractFacade<Album>{
 
-        @PersistenceContext(unitName = "ian")
-	private EntityManager em;
-    public FotografiaEJBFacade() {
-        super(Fotografia.class);
+    @PersistenceContext(unitName = "ian")
+    private EntityManager em;
+    public AlbumEJBFacade() {
+        super(Album.class);
     }
     
     
