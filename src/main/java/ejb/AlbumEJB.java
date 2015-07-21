@@ -9,6 +9,8 @@ import facade.AlbumEJBFacade;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import model.Album;
+import model.PermisoAlbum;
+import model.Usuario;
 
 
 
@@ -23,10 +25,21 @@ public class AlbumEJB implements AlbumEJBLocal{
     AlbumEJBFacade albumFacade;
     
    @Override
-   public void insertaAlbumDefault(){
+   public void insertaAlbumDefault(Usuario user){
        Album album=new Album();
-       album.setIdAlbum(0);
-       album.setNombreAlbum("Fotografias");
+       RecurrentesEJB fecha=new RecurrentesEJB();
+       PermisoAlbum pa=new PermisoAlbum(1);
+       album.setIdUser(user);
+       album.setNombreAlbum("Fotografafias");
+       album.setFechacreacionAlbum(fecha.fechaActual());
+       album.setDescripcionAlbum("Fotografías de "+user.getNombreRealUser());
+       album.setDireccionFotoPortadaAlbum(GlobalVariables.photoPath+GlobalVariables.defaultAlbumFrontPhoto);
+       album.setCantidadFotografiasAlbum(0);
+       album.setCantidadFavoritos(0);
+       album.setCantidadComentarios(0);
+       album.setUltimaActualizacionAlbum(fecha.fechaActual());
+       album.setIdPermisoAlbum(pa);
+       //return album;
        this.albumFacade.create(album);
    }
     

@@ -6,6 +6,7 @@ package ejb;
  * @author ian
  */
 
+import facade.AlbumEJBFacade;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -14,12 +15,17 @@ import java.text.ParseException;
 import model.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Album;
+import model.PermisoAlbum;
 
 @Stateless  
 public class RegistroEJB implements RegistroEJBLocal{
 
     @EJB
     UsuarioEJBFacade userFacade;
+    
+    @EJB
+    AlbumEJBLocal albumEJB;
     
     public RegistroEJB(){
     
@@ -46,11 +52,11 @@ public class RegistroEJB implements RegistroEJBLocal{
             user.setApellidoUser(lastname);
             user.setPassUser(pass);
             user.setAliasUser(alias);
-        try {
-            user.setFechaCumpleanosUser(fecha.FechaAngularToJava(date));
-        } catch (ParseException ex) {
-            Logger.getLogger(RegistroEJB.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            try {
+                user.setFechaCumpleanosUser(fecha.FechaAngularToJava(date));
+            } catch (ParseException ex) {
+                Logger.getLogger(RegistroEJB.class.getName()).log(Level.SEVERE, null, ex);
+            }
             user.setFechaCreacionCuenta(fecha.fechaActual());
             user.setFechaUltimaActualizacion(fecha.fechaActual());
             user.setSexoUser(sex);
@@ -61,6 +67,22 @@ public class RegistroEJB implements RegistroEJBLocal{
             user.setDireccionFotoPerfilUser("perfil");
             user.setDireccionFotoPortadaUser("portada");
             this.userFacade.create(user);
+            
+            //Album album = new Album();
+            /*PermisoAlbum pa=new PermisoAlbum(1);
+            album.setIdUser(user);
+            album.setNombreAlbum("Fotografías");
+            album.setFechacreacionAlbum(fecha.fechaActual());
+            album.setDescripcionAlbum("Fotografías de "+user.getNombreRealUser());
+            album.setDireccionFotoPortadaAlbum(GlobalVariables.photoPath+GlobalVariables.defaultAlbumFrontPhoto);
+            album.setCantidadFotografiasAlbum(0);
+            album.setCantidadFavoritos(0);
+            album.setCantidadComentarios(0);
+            album.setUltimaActualizacionAlbum(fecha.fechaActual());
+            album.setIdPermisoAlbum(pa);*/
+            albumEJB.insertaAlbumDefault(user);
+            //this.albumFacade.create(album);
+            
         }    
     
     
@@ -78,9 +100,8 @@ public class RegistroEJB implements RegistroEJBLocal{
                 largo--;
                 contador++;
             }
-        AlbumEJB album = new AlbumEJB();    
         insertaUsuario(mail,name,lastname,pass,date,sex,alias);
-        album.insertaAlbumDefault();
+        
         return "ship";
     }
              

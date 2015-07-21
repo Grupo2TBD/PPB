@@ -11,4 +11,7 @@ package ejb;
  */
 public class GlobalVariables {
     public static String photoPath="/home/ian/Escritorio/img/";
+    public static String defaultProfilePhoto="profilePhoto";
+    public static String defaultFrontPhoto="frontPhoto";
+    public static String defaultAlbumFrontPhoto="albumPhoto";
 }
