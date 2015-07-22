@@ -14,4 +14,5 @@ import model.Usuario;
  */
 public interface AlbumEJBLocal {
     void insertaAlbumDefault(Usuario user);
+    
 }

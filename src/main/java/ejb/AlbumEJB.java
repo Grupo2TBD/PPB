@@ -30,7 +30,7 @@ public class AlbumEJB implements AlbumEJBLocal{
        RecurrentesEJB fecha=new RecurrentesEJB();
        PermisoAlbum pa=new PermisoAlbum(1);
        album.setIdUser(user);
-       album.setNombreAlbum("Fotografafias");
+       album.setNombreAlbum("Fotografías");
        album.setFechacreacionAlbum(fecha.fechaActual());
        album.setDescripcionAlbum("Fotografías de "+user.getNombreRealUser());
        album.setDireccionFotoPortadaAlbum(GlobalVariables.photoPath+GlobalVariables.defaultAlbumFrontPhoto);
@@ -44,4 +44,6 @@ public class AlbumEJB implements AlbumEJBLocal{
    }
     
     
+   
+   
 }

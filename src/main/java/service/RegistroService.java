@@ -6,11 +6,8 @@
 package service;
 
 import ejb.RegistroEJBLocal;
-import java.util.List;
-import model.Usuario;
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
@@ -29,7 +26,7 @@ public class RegistroService {
     @Produces({"application/json"})
     public String registro(){
         
-        return registroEJB.Registro("lacsm@tbd.cl","ian", "lastname", "pass","23/06/1994","f","yapo");
+        return registroEJB.Registro("niki@tbd.cl","ian", "lastname", "pass","23/06/1994","flofi","cole");
     }
     
 }

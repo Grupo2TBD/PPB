@@ -15,7 +15,7 @@ import model.Fotografia;
  * @author ian
  */
 @Stateless
-public class UploadEJB implements UploadEJBLocal{
+public class FotografiaEJB implements FotografiaEJBLocal{
     @EJB
     FotografiaEJBFacade photoFacade;
     

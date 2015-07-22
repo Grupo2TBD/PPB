@@ -9,6 +9,6 @@ package ejb;
  *
  * @author ian
  */
-public interface UploadEJBLocal {
+public interface FotografiaEJBLocal {
     void insertPhotoInfo(int idUser, int idPrivacidad, String title, String description,String format);
 }

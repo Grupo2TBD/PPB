@@ -6,7 +6,7 @@
 package service;
 
 import ejb.AlbumEJBLocal;
-import ejb.UploadEJBLocal;
+import ejb.FotografiaEJBLocal;
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,7 +18,7 @@ import javax.ws.rs.Path;
 @Path("/upload")
 public class UploadService {
     @EJB
-    UploadEJBLocal uploadEJB;
+    FotografiaEJBLocal uploadEJB;
     
     @EJB
     AlbumEJBLocal albumEJB;

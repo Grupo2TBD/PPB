@@ -5,14 +5,13 @@
  */
 package ejb;
 
+import model.Usuario;
+
 /**
  *
  * @author ian
  */
-import java.util.List;
-import javax.ejb.Local;
-import model.Usuario;
-@Local
-public interface LoginEJBLocal {
+public interface UsuarioEJBLocal {
+    void insertaUsuarioDefault(Usuario user, String mail, String name, String lastname, String pass, String date, String sex, String alias);
     String Login(String mail, String pass);
 }

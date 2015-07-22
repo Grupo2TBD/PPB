@@ -5,10 +5,8 @@
  */
 package service;
 
-import ejb.LoginEJBLocal;
-import ejb.RegistroEJBLocal;
-import java.util.List;
-import model.Usuario;
+
+import ejb.UsuarioEJBLocal;
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -22,13 +20,13 @@ import javax.ws.rs.Produces;
 //@ApplicationPath("/")
 public class LoginService {
     @EJB
-    LoginEJBLocal loginEJB;
+    UsuarioEJBLocal userEJB;
     
     
     @GET//@POST
     @Produces({"application/json"})
     public String registro(){
-        return loginEJB.Login("akjfosj@sacql.cl","pass");
+        return userEJB.Login("ian@tbd.cl","pass");
     }
     
     

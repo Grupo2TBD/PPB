@@ -16,8 +16,7 @@ import model.Usuario;
 
 @Local
 public interface RegistroEJBLocal {
-    List <Usuario>get();
-    Usuario test();
+    
     String Registro(String mail, String name, String lastname, String pass, String date, String sex, String alias);
     void insertaUsuario(String mail, String name, String lastname, String pass, String date, String sex, String alias);
    
