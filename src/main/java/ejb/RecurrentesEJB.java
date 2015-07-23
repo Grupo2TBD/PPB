@@ -8,11 +8,13 @@ package ejb;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author ian
  */
+@Stateless
 public class RecurrentesEJB implements RecurrentesEJBLocal{
     public RecurrentesEJB() {
     }

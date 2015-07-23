@@ -5,10 +5,11 @@
  */
 package ejb;
 
+
 /**
  *
  * @author ian
  */
 public interface FotografiaEJBLocal {
-    void insertPhotoInfo(int idUser, int idPrivacidad, String title, String description,String format);
+    void insertPhotoInfo (String dateFrom, String title, String description, String format, int idPrivacidad);
 }

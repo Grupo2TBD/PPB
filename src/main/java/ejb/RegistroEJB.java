@@ -23,6 +23,7 @@ public class RegistroEJB implements RegistroEJBLocal{
     
     @EJB
     UsuarioEJBFacade userFacade;
+    
     public RegistroEJB(){
     
     }

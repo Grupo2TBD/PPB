@@ -5,7 +5,7 @@
  */
 package service;
 
-import ejb.FotografiaEJBLocal;
+import ejb.UsuarioEJBLocal;
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,15 +14,15 @@ import javax.ws.rs.Path;
  *
  * @author ian
  */
-@Path("/upload")
-public class UploadService {
+@Path("/editarPerfil")
+public class editProfileService {
     @EJB
-    FotografiaEJBLocal fotografiaEJB;
+    UsuarioEJBLocal userEJB;
     
     
     @GET
-    public void uploadService() {
-        fotografiaEJB.insertPhotoInfo("23/06/1994", "Título foto", "Descripciónde la foto", "png",8);
+    public void editProfileData() {
+        userEJB.editarPerfil(13,"ian", "lastname", "pass","m","gatoconbotas");
         
     }
     

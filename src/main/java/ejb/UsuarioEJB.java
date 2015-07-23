@@ -5,7 +5,6 @@
  */
 package ejb;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import facade.UsuarioEJBFacade;
 import java.text.ParseException;
 import java.util.List;
@@ -70,4 +69,16 @@ public class UsuarioEJB implements UsuarioEJBLocal{
         
     }
     
+    @Override
+    public void editarPerfil(int idUser, String name, String lastname, String pass, String sex, String alias){
+        Object id=idUser;
+        Usuario user=this.userFacade.find(id);
+        user.setNombreRealUser(name);
+        user.setApellidoUser(lastname);
+        user.setPassUser(pass);
+        user.setSexoUser(sex);
+        user.setAliasUser(alias);
+        this.userFacade.edit(user);
+    
+    }
 }

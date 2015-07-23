@@ -14,4 +14,5 @@ import model.Usuario;
 public interface UsuarioEJBLocal {
     void insertaUsuarioDefault(Usuario user, String mail, String name, String lastname, String pass, String date, String sex, String alias);
     String Login(String mail, String pass);
+    void editarPerfil(int idUser,String name, String lastname, String pass, String sex, String alias);
 }
