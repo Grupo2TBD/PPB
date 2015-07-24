@@ -10,6 +10,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import model.Album;
 import model.PermisoAlbum;
+import model.Privacidad;
 import model.Usuario;
 
 
@@ -29,6 +30,7 @@ public class AlbumEJB implements AlbumEJBLocal{
        Album album=new Album();
        RecurrentesEJB fecha=new RecurrentesEJB();
        PermisoAlbum pa=new PermisoAlbum(1);
+       Privacidad privacy=new Privacidad(0);
        album.setIdUser(user);
        album.setNombreAlbum("Fotografías");
        album.setFechacreacionAlbum(fecha.fechaActual());
@@ -39,7 +41,7 @@ public class AlbumEJB implements AlbumEJBLocal{
        album.setCantidadComentarios(0);
        album.setUltimaActualizacionAlbum(fecha.fechaActual());
        album.setIdPermisoAlbum(pa);
-       //return album;
+       album.setIdPrivacidad(privacy);
        this.albumFacade.create(album);
    }
     

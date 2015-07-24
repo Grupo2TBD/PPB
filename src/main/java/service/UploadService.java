@@ -22,7 +22,7 @@ public class UploadService {
     
     @GET
     public void uploadService() {
-        fotografiaEJB.insertPhotoInfo("23/06/1994", "Título foto", "Descripciónde la foto", "png",8);
+        fotografiaEJB.insertPhotoInfo("23/06/1994", "Título foto", "Descripciónde la foto", "png");
         
     }
     

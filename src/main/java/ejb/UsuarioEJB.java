@@ -25,10 +25,12 @@ public class UsuarioEJB implements UsuarioEJBLocal{
     
     @EJB
     UsuarioEJBFacade userFacade;
+    
+    @EJB
+    RecurrentesEJB fecha;
   
     @Override
     public void insertaUsuarioDefault(Usuario user, String mail, String name, String lastname, String pass, String date, String sex, String alias){
-        RecurrentesEJB fecha=new RecurrentesEJB();
             user.setEmailUser(mail);
             user.setNombreRealUser(name);
             user.setApellidoUser(lastname);
@@ -70,7 +72,17 @@ public class UsuarioEJB implements UsuarioEJBLocal{
     }
     
     @Override
-    public void editarPerfil(int idUser, String name, String lastname, String pass, String sex, String alias){
+    public String editarPerfil(int idUser, String name, String lastname, String pass, String sex, String alias){
+        List <Usuario> list =this.userFacade.findAll();
+        int largo=list.size();
+        int contador=0;
+        while(largo!=0){
+            if(alias.equals(list.get(contador).getAliasUser())){
+                return "no";
+            }
+            largo--;
+        contador++;
+        }
         Object id=idUser;
         Usuario user=this.userFacade.find(id);
         user.setNombreRealUser(name);
@@ -78,7 +90,9 @@ public class UsuarioEJB implements UsuarioEJBLocal{
         user.setPassUser(pass);
         user.setSexoUser(sex);
         user.setAliasUser(alias);
+        user.setFechaUltimaActualizacion(fecha.fechaActual());
         this.userFacade.edit(user);
-    
+        return "si";
     }
+    
 }

@@ -7,12 +7,11 @@ package ejb;
 
 import javax.ejb.Local;
 
-
 /**
  *
  * @author ian
  */
 @Local
-public interface FotografiaEJBLocal {
-    void insertPhotoInfo (String dateFrom, String title, String description, String format);
+public interface UploadEJBLocal {
+    void uploadPhoto(String dateFrom, String title, String description, String format);
 }

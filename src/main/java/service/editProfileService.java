@@ -21,8 +21,8 @@ public class editProfileService {
     
     
     @GET
-    public void editProfileData() {
-        userEJB.editarPerfil(13,"ian", "lastname", "pass","m","gatoconbotas");
+    public String editProfileData() {
+        return userEJB.editarPerfil(15,"ian", "lastname", "pass","m","jhpnny");
         
     }
     

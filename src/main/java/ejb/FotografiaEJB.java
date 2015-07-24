@@ -27,9 +27,8 @@ public class FotografiaEJB implements FotografiaEJBLocal{
     RecurrentesEJBLocal fecha;
     
     @Override
-    public void insertPhotoInfo(String dateFrom, String title, String description, String format, int idPrivacidad) {
+    public void insertPhotoInfo(String dateFrom, String title, String description, String format) {
         Fotografia foto=new Fotografia();
-        Object id=idPrivacidad;
         foto.setFechaSubidaPhoto(fecha.fechaActual());
         try {
             foto.setFechaTomadaPhoto(fecha.FechaAngularToJava(dateFrom));

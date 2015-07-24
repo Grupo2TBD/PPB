@@ -5,12 +5,14 @@
  */
 package ejb;
 
+import javax.ejb.Local;
 import javax.ws.rs.core.Response;
 
 /**
  *
  * @author ian
  */
+@Local
 public interface DownloadEJBLocal {
     Response DownloadPhoto(String id);
 }

@@ -5,13 +5,14 @@
  */
 package ejb;
 
-import model.Album;
+import javax.ejb.Local;
 import model.Usuario;
 
 /**
  *
  * @author ian
  */
+@Local
 public interface AlbumEJBLocal {
     void insertaAlbumDefault(Usuario user);
     
