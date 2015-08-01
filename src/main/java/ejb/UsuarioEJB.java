@@ -27,7 +27,7 @@ public class UsuarioEJB implements UsuarioEJBLocal{
     UsuarioEJBFacade userFacade;
     
     @EJB
-    RecurrentesEJB fecha;
+    RecurrentesEJBLocal fecha;
   
     @Override
     public void insertaUsuarioDefault(Usuario user, String mail, String name, String lastname, String pass, String date, String sex, String alias){

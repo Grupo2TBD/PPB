@@ -6,6 +6,7 @@
 package ejb;
 
 import javax.ejb.Local;
+import model.Fotografia;
 import model.Usuario;
 
 /**
@@ -15,5 +16,6 @@ import model.Usuario;
 @Local
 public interface AlbumEJBLocal {
     void insertaAlbumDefault(Usuario user);
-    
+    void buscaAlbum(Usuario user,Fotografia photo);
+    String crearAlbum(int idUsuario,String nombre, String descripcion, int privacidad, int permisos, String fotografiaPortada);
 }

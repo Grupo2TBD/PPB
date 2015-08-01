@@ -5,10 +5,14 @@
  */
 package ejb;
 
+import facade.FotografiaEJBFacade;
 import facade.TagEJBFacade;
+import facade.UsuarioEJBFacade;
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import model.Fotografia;
 import model.Tag;
 
 
@@ -26,6 +30,12 @@ public class TagEJB implements TagEJBLocal{
     
     @EJB
     RecurrentesEJB fecha;
+    
+    @EJB
+    UsuarioEJBFacade usuarioFacade;
+    
+    @EJB
+    FotografiaEJBFacade fotografiaFacade;
   
     @Override
     public boolean insertTag(String tag){
@@ -45,9 +55,16 @@ public class TagEJB implements TagEJBLocal{
     }
     
     @Override
-    public void insertDataTag(String tagName){
-        Tag tag=new Tag();
-        tag.setNombreTag(tagName);
-        this.tagFacade.create(tag);
+    public void insertDataTag(String tagName,String idUser){
+        if(insertTag(tagName)==true){
+            Tag tag=new Tag();
+            Collection<Fotografia> collect = this.fotografiaFacade.findAll();
+            //collect.add(this.fotografiaFacade.find(3)); 
+            tag.setFotografiaCollection(null);
+            tag.setIdUser(this.usuarioFacade.find(idUser));
+            tag.setNombreTag(tagName.toLowerCase());
+            this.tagFacade.create(tag);
+        }
+        
     }
 }

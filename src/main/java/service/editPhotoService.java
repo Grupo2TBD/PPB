@@ -10,19 +10,20 @@ import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
+
 /**
  *
  * @author ian
  */
-@Path("/upload")
-public class UploadService {
+@Path("/editarFoto")
+public class editPhotoService {
     @EJB
-    FotografiaEJBLocal upload;
+    FotografiaEJBLocal edit;
     
     
     @GET
     public void uploadService() {
-        upload.uploadPhoto("23/06/1994", "En la playa", "Descripciónde la foto", "png",0,18,16);
+        edit.editPhoto(2, 1, 1, "otro título", "nueva descripcion");
         
     }
     

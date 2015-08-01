@@ -12,7 +12,6 @@ import javax.ejb.Local;
  * @author ian
  */
 @Local
-public interface TagEJBLocal {
-    boolean insertTag(String tag);
-    void insertDataTag(String tag, String idUser);
+public interface ExifEJBLocal {
+    void insertDataExif(int idFoto, int idCamara, String apertura, int largoFoco, int flash);
 }

@@ -26,7 +26,7 @@ public class RegistroService {
     @Produces({"application/json"})
     public String registro(){
         
-        return registroEJB.Registro("niki@tbd.cl","ian", "lastname", "pass","23/06/1994","flofi","cole");
+        return registroEJB.Registro("zuñiga@tbd.cl","ig", "lastname", "pass","23/06/1994","m","nacho");
     }
     
 }
