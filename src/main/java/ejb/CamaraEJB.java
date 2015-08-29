@@ -21,7 +21,7 @@ public class CamaraEJB implements CamaraEJBLocal{
     CamaraEJBFacade camaraFacade;
     
     @Override
-    public void insertDataCamera(String nombre,int megaPx,int zoom, int pantalla, String tipo, String dir, String marca, int peso){
+    public Camara insertCamera(String nombre,int megaPx,int zoom, int pantalla, String tipo, String marca, int peso){
         Camara camara = new Camara();
         if(findCamera(nombre)==true){
             camara.setNombreCamara(nombre);
@@ -32,7 +32,9 @@ public class CamaraEJB implements CamaraEJBLocal{
             camara.setMarcaCamara(marca);
             camara.setPesoCamara(peso);
             this.camaraFacade.create(camara);
+            return camara;
         }
+        return camara;
     }
     
     @Override

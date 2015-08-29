@@ -14,4 +14,5 @@ public class GlobalVariables {
     public static String defaultProfilePhoto="profilePhoto";
     public static String defaultFrontPhoto="frontPhoto";
     public static String defaultAlbumFrontPhoto="albumPhoto";
+    
 }

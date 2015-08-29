@@ -110,7 +110,7 @@ public class Usuario implements Serializable {
         @JoinColumn(name = "ID_PHOTO", referencedColumnName = "ID_PHOTO")})
     @ManyToMany
     private Collection<Fotografia> fotografiaCollection;
-    @OneToMany(mappedBy = "idUser")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private Collection<Fotografia> fotografiaCollection1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Collection<FavoritoAlbum> favoritoAlbumCollection;
@@ -120,7 +120,7 @@ public class Usuario implements Serializable {
     private Collection<ComentarioAlbum> comentarioAlbumCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Collection<FavoritoFotografia> favoritoFotografiaCollection;
-    @OneToMany(mappedBy = "idUser")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private Collection<Album> albumCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Collection<Seguidor> seguidorCollection;

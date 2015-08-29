@@ -17,5 +17,6 @@ import model.Usuario;
 public interface AlbumEJBLocal {
     void insertaAlbumDefault(Usuario user);
     void buscaAlbum(Usuario user,Fotografia photo);
-    String crearAlbum(int idUsuario,String nombre, String descripcion, int privacidad, int permisos, String fotografiaPortada);
+    void crearAlbum(int idUsuario,String nombre, String descripcion, int privacidad, int permisos, String fotografiaPortada);
+    void editarAlbum(int idAlbum, String nombre, String descripcion, int idPrivacidad, int idPermisos);
 }

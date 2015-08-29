@@ -8,7 +8,6 @@ package ejb;
 import facade.AlbumEJBFacade;
 import facade.AlbumFotografiaEJBFacade;
 import facade.PermisoAlbumEJBFacade;
-import facade.PermisoFotografiaEJBFacade;
 import facade.PrivacidadEJBFacade;
 import facade.UsuarioEJBFacade;
 import java.util.List;
@@ -20,8 +19,6 @@ import model.AlbumFotografiaPK;
 import model.Fotografia;
 import model.PermisoAlbum;
 import model.Privacidad;
-//import model.PermisoAlbum;
-//import model.Privacidad;
 import model.Usuario;
 
 
@@ -57,7 +54,7 @@ public class AlbumEJB implements AlbumEJBLocal{
        RecurrentesEJB fecha=new RecurrentesEJB();
        PermisoAlbum permisoAlbum = this.permisoAlbumFacade.find(1);
        Privacidad privacidad = this.privacidadFacade.find(0);
-       //album.setIdPermisoAlbum(permisoAlbum);
+       album.setIdPermisoAlbum(permisoAlbum);
        album.setIdPrivacidad(privacidad);
        album.setIdUser(user);
        album.setNombreAlbum("Fotografías");
@@ -94,5 +91,51 @@ public class AlbumEJB implements AlbumEJBLocal{
         }
     }
    
+   @Override
+   public void crearAlbum(int idUsuario,String nombre, String descripcion, int privacidad, int permisos, String fotografiaPortada){
+         
+       Album album = new Album();
+       //Asociando el album con el usuario creador
+       Usuario user = this.userFacade.find(idUsuario);
+       album.setIdUser(user);
+       album.setNombreAlbum(nombre);
+       album.setDescripcionAlbum(descripcion);
+       //Asociar el album con su privacidad
+       album.setIdPrivacidad(this.privacidadFacade.find(privacidad));
+       //Asociar el album con sus permisos
+       album.setIdPermisoAlbum(this.permisoAlbumFacade.find(permisos));
+       album.setDireccionFotoPortadaAlbum(fotografiaPortada);
+       //Informacion ingresada por nosotros
+       album.setFechacreacionAlbum(fecha.fechaActual());
+       album.setUltimaActualizacionAlbum(fecha.fechaActual());
+       album.setCantidadFotografiasAlbum(0);
+       album.setCantidadFavoritos(0);
+       album.setCantidadComentarios(0);
+
+       this.albumFacade.create(album);
+
+              
+   }
    
+   @Override
+    public void editarAlbum(int idAlbum, String nombre, String descripcion, int idPrivacidad, int idPermiso){
+    
+        //Buscando el álbum en el sistema
+        Album album = this.albumFacade.find(idAlbum);
+        
+        //Editando información del álbum
+        album.setNombreAlbum(nombre);
+        album.setDescripcionAlbum(descripcion);
+        
+        //Asociar el album con su privacidad
+        album.setIdPrivacidad(this.privacidadFacade.find(idPrivacidad));
+       
+        //Asociar el album con sus permisos
+        album.setIdPermisoAlbum(this.permisoAlbumFacade.find(idPermiso));
+        
+        album.setUltimaActualizacionAlbum(fecha.fechaActual());
+        
+        this.albumFacade.edit(album);
+ 
+    }
 }

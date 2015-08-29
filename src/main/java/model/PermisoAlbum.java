@@ -30,9 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PermisoAlbum.findAll", query = "SELECT p FROM PermisoAlbum p"),
     @NamedQuery(name = "PermisoAlbum.findByIdPermisoAlbum", query = "SELECT p FROM PermisoAlbum p WHERE p.idPermisoAlbum = :idPermisoAlbum"),
     @NamedQuery(name = "PermisoAlbum.findByCansharealbum", query = "SELECT p FROM PermisoAlbum p WHERE p.cansharealbum = :cansharealbum"),
-    @NamedQuery(name = "PermisoAlbum.findByCanfavoritealbum", query = "SELECT p FROM PermisoAlbum p WHERE p.canfavoritealbum = :canfavoritealbum"),
-    @NamedQuery(name = "PermisoAlbum.findByCancommentalbum", query = "SELECT p FROM PermisoAlbum p WHERE p.cancommentalbum = :cancommentalbum"),
-    @NamedQuery(name = "PermisoAlbum.findByCandeletealbum", query = "SELECT p FROM PermisoAlbum p WHERE p.candeletealbum = :candeletealbum")})
+    @NamedQuery(name = "PermisoAlbum.findByCancommentalbum", query = "SELECT p FROM PermisoAlbum p WHERE p.cancommentalbum = :cancommentalbum")})
 public class PermisoAlbum implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,12 +40,8 @@ public class PermisoAlbum implements Serializable {
     private Integer idPermisoAlbum;
     @Column(name = "CANSHAREALBUM")
     private Boolean cansharealbum;
-    @Column(name = "CANFAVORITEALBUM")
-    private Boolean canfavoritealbum;
     @Column(name = "CANCOMMENTALBUM")
     private Boolean cancommentalbum;
-    @Column(name = "CANDELETEALBUM")
-    private Boolean candeletealbum;
     @OneToMany(mappedBy = "idPermisoAlbum")
     private Collection<Album> albumCollection;
 
@@ -74,28 +68,12 @@ public class PermisoAlbum implements Serializable {
         this.cansharealbum = cansharealbum;
     }
 
-    public Boolean getCanfavoritealbum() {
-        return canfavoritealbum;
-    }
-
-    public void setCanfavoritealbum(Boolean canfavoritealbum) {
-        this.canfavoritealbum = canfavoritealbum;
-    }
-
     public Boolean getCancommentalbum() {
         return cancommentalbum;
     }
 
     public void setCancommentalbum(Boolean cancommentalbum) {
         this.cancommentalbum = cancommentalbum;
-    }
-
-    public Boolean getCandeletealbum() {
-        return candeletealbum;
-    }
-
-    public void setCandeletealbum(Boolean candeletealbum) {
-        this.candeletealbum = candeletealbum;
     }
 
     @XmlTransient

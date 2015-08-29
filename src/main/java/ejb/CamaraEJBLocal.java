@@ -6,6 +6,7 @@
 package ejb;
 
 import javax.ejb.Local;
+import model.Camara;
 
 /**
  *
@@ -15,5 +16,5 @@ import javax.ejb.Local;
 @Local
 public interface CamaraEJBLocal {
     boolean findCamera(String nombre);
-    void insertDataCamera(String nombre,int megaPx,int zoom, int pantalla, String tipo, String dir, String marca, int peso);
+    Camara insertCamera(String nombre,int megaPx,int zoom, int pantalla, String tipo, String marca, int peso);
 }

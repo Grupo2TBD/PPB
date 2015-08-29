@@ -80,13 +80,13 @@ public class Album implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAlbum")
     private Collection<ComentarioAlbum> comentarioAlbumCollection;
     @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Usuario idUser;
     @JoinColumn(name = "ID_PERMISO_ALBUM", referencedColumnName = "ID_PERMISO_ALBUM")
     @ManyToOne
     private PermisoAlbum idPermisoAlbum;
     @JoinColumn(name = "ID_PRIVACIDAD", referencedColumnName = "ID_PRIVACIDAD")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Privacidad idPrivacidad;
 
     public Album() {

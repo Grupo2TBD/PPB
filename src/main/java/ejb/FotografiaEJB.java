@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import model.Camara;
 import model.Fotografia;
 import model.PermisoFotografia;
 import model.Privacidad;
@@ -52,8 +53,7 @@ public class FotografiaEJB implements FotografiaEJBLocal{
     @Override
     public void insertPhotoInfo(String dateFrom, String title, String description, String format,Fotografia foto,int idUser) {
         //Fotografia foto=new Fotografia();
-        Object id=idUser;
-        Usuario usuario = this.userFacade.find(id);
+        Usuario usuario = this.userFacade.find(idUser);
         foto.setFechaSubidaPhoto(fecha.fechaActual());
         try {
             foto.setFechaTomadaPhoto(fecha.FechaAngularToJava(dateFrom));
@@ -78,18 +78,10 @@ public class FotografiaEJB implements FotografiaEJBLocal{
     @Override
     public void uploadPhoto(String dateFrom, String title, String description, String format,int idPrivacy,int idUsuario,int idPermiso){
         Fotografia photo = new Fotografia();
-        Object id = idPrivacy;
-        Privacidad privacy = this.privacyFacade.find(id);
-        photo.setIdPrivacidad(privacy);
-        id=idUsuario;
-        Usuario usuario = this.userFacade.find(id);
-        photo.setIdUser(usuario);
-        id=0;
-        TipoClasificacion clasificacion = this.clasificacionFacade.find(id);
-        photo.setIdTipoClasificacion(clasificacion);
-        id=idPermiso;
-        PermisoFotografia permiso=this.permisoFotoFacade.find(id);
-        //photo.setIdPermisoFotografia(permiso);
+        photo.setIdPrivacidad(this.privacyFacade.find(idPrivacy));
+        photo.setIdUser(this.userFacade.find(idUsuario));
+        photo.setIdTipoClasificacion(this.clasificacionFacade.find(0));
+        photo.setIdPermisoFotografia(this.permisoFotoFacade.find(idPermiso));
         insertPhotoInfo(dateFrom, title, description, format, photo, idUsuario);
         
     }
@@ -99,7 +91,7 @@ public class FotografiaEJB implements FotografiaEJBLocal{
         Object id=idPhoto;
         Fotografia photo = this.photoFacade.find(idPhoto);
         photo.setIdPrivacidad(this.privacyFacade.find(idPrivacidad));
-        //photo.setIdPermisoFotografia(this.permisoFotoFacade.find(idPermiso));
+        photo.setIdPermisoFotografia(this.permisoFotoFacade.find(idPermiso));
         photo.setTituloPhoto(titulo);
         photo.setDescripcionPhoto(descripcion);
         photo.setUltimaActualizacionPhoto(fecha.fechaActual());

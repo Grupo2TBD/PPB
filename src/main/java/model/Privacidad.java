@@ -8,6 +8,7 @@ package model;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -41,9 +42,9 @@ public class Privacidad implements Serializable {
     @Size(max = 20)
     @Column(name = "TIPO_PRIVACIDAD")
     private String tipoPrivacidad;
-    @OneToMany(mappedBy = "idPrivacidad")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPrivacidad")
     private Collection<Fotografia> fotografiaCollection;
-    @OneToMany(mappedBy = "idPrivacidad")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPrivacidad")
     private Collection<Album> albumCollection;
 
     public Privacidad() {

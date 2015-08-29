@@ -5,7 +5,7 @@
  */
 package service;
 
-import ejb.RegistroEJBLocal;
+import ejb.UsuarioEJBLocal;
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -19,7 +19,7 @@ import javax.ws.rs.Produces;
 //@ApplicationPath("/")
 public class RegistroService {
     @EJB
-    RegistroEJBLocal registroEJB;
+    UsuarioEJBLocal registroEJB;
     
     
     @GET//POST

@@ -103,16 +103,16 @@ public class Fotografia implements Serializable {
     @ManyToMany(mappedBy = "fotografiaCollection")
     private Collection<Usuario> usuarioCollection;
     @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Usuario idUser;
     @JoinColumn(name = "ID_CAMARA", referencedColumnName = "ID_CAMARA")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Camara idCamara;
     @JoinColumn(name = "ID_LOCALIZACION", referencedColumnName = "ID_LOCALIZACION")
     @ManyToOne
     private Localizacion idLocalizacion;
     @JoinColumn(name = "ID_PRIVACIDAD", referencedColumnName = "ID_PRIVACIDAD")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Privacidad idPrivacidad;
     @JoinColumn(name = "ID_PERMISO_FOTOGRAFIA", referencedColumnName = "ID_PERMISO_FOTOGRAFIA")
     @ManyToOne

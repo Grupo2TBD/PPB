@@ -31,8 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PermisoFotografia.findByIdPermisoFotografia", query = "SELECT p FROM PermisoFotografia p WHERE p.idPermisoFotografia = :idPermisoFotografia"),
     @NamedQuery(name = "PermisoFotografia.findByCansharephoto", query = "SELECT p FROM PermisoFotografia p WHERE p.cansharephoto = :cansharephoto"),
     @NamedQuery(name = "PermisoFotografia.findByCancommentphoto", query = "SELECT p FROM PermisoFotografia p WHERE p.cancommentphoto = :cancommentphoto"),
-    @NamedQuery(name = "PermisoFotografia.findByCandownloadphoto", query = "SELECT p FROM PermisoFotografia p WHERE p.candownloadphoto = :candownloadphoto"),
-    @NamedQuery(name = "PermisoFotografia.findByCanfavoritephoto", query = "SELECT p FROM PermisoFotografia p WHERE p.canfavoritephoto = :canfavoritephoto")})
+    @NamedQuery(name = "PermisoFotografia.findByCandownloadphoto", query = "SELECT p FROM PermisoFotografia p WHERE p.candownloadphoto = :candownloadphoto")})
 public class PermisoFotografia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,8 +45,6 @@ public class PermisoFotografia implements Serializable {
     private Boolean cancommentphoto;
     @Column(name = "CANDOWNLOADPHOTO")
     private Boolean candownloadphoto;
-    @Column(name = "CANFAVORITEPHOTO")
-    private Boolean canfavoritephoto;
     @OneToMany(mappedBy = "idPermisoFotografia")
     private Collection<Fotografia> fotografiaCollection;
 
@@ -88,14 +85,6 @@ public class PermisoFotografia implements Serializable {
 
     public void setCandownloadphoto(Boolean candownloadphoto) {
         this.candownloadphoto = candownloadphoto;
-    }
-
-    public Boolean getCanfavoritephoto() {
-        return canfavoritephoto;
-    }
-
-    public void setCanfavoritephoto(Boolean canfavoritephoto) {
-        this.canfavoritephoto = canfavoritephoto;
     }
 
     @XmlTransient
