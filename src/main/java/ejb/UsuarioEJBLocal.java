@@ -5,6 +5,7 @@
  */
 package ejb;
 
+import java.util.List;
 import javax.ejb.Local;
 import model.Usuario;
 
@@ -18,4 +19,5 @@ public interface UsuarioEJBLocal {
     String Login(String mail, String pass);
     String editarPerfil(int idUser,String name, String lastname, String pass, String sex, String alias);
     String Registro(String mail, String name, String lastname, String pass, String date, String sex, String alias);
+    List<Usuario> usuarios();
 }

@@ -12,11 +12,17 @@ import ejb.ExifEJBLocal;
 import ejb.FotografiaEJBLocal;
 import ejb.TagEJBLocal;
 import ejb.UsuarioEJBLocal;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import static javax.ws.rs.HttpMethod.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import model.Camara;
+import model.Usuario;
+
 /**
  *
  * @author ian
@@ -150,6 +156,14 @@ public class prueba {
         String pass="pass";
         return usuarioEJB.Login(mail, pass);
     
+    }
+    
+    @POST
+    @Path("/users")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Usuario> todoUsuarios(){
+
+        return usuarioEJB.usuarios();
     }
     
 }

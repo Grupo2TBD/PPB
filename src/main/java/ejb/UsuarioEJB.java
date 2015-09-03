@@ -33,6 +33,11 @@ public class UsuarioEJB implements UsuarioEJBLocal{
     AlbumEJBLocal albumEJB;
   
     @Override
+    public List<Usuario> usuarios(){
+        return userFacade.findAll();
+    }
+    
+    @Override
     public void insertUserData(Usuario user, String mail, String name, String lastname, String pass, String date, String sex, String alias){
             user.setEmailUser(mail);
             user.setNombreRealUser(name);
