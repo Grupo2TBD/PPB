@@ -79,7 +79,39 @@ public class UsuarioEJB implements UsuarioEJBLocal{
         Usuario user = new Usuario();
         insertUserData(user, mail, name, lastname, pass, date, sex, alias);
         albumEJB.insertaAlbumDefault(user);
+        
         return "si";
+    }
+    
+    @Override
+    public void insertData(Usuario user){
+            
+            user.setFechaCreacionCuenta(fecha.fechaActual());
+            user.setFechaUltimaActualizacion(fecha.fechaActual());
+            user.setCantidadAlbumesCreados(0);
+            user.setCantidadFotografiasSubidas(0);
+            user.setCantidadSeguidores(0);
+            user.setCantidadSeguidos(0);
+            user.setDireccionFotoPerfilUser(GlobalVariables.photoPath+GlobalVariables.defaultProfilePhoto);
+            user.setDireccionFotoPortadaUser(GlobalVariables.photoPath+GlobalVariables.defaultFrontPhoto);
+            this.userFacade.create(user);
+    }
+    
+    @Override
+    public boolean verify(Usuario user){
+        List <Usuario> list =this.userFacade.findAll();
+        
+            int largo=list.size();
+            int contador=0;
+            while(largo!=0){
+                if(user.getEmailUser().equals(list.get(contador).getEmailUser()) || user.getAliasUser().equals(list.get(contador).getAliasUser())){
+                    return false;
+                }
+                largo--;
+                contador++;
+            }
+            
+        return true;
     }
     
     @Override

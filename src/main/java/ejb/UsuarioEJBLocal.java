@@ -20,4 +20,6 @@ public interface UsuarioEJBLocal {
     String editarPerfil(int idUser,String name, String lastname, String pass, String sex, String alias);
     String Registro(String mail, String name, String lastname, String pass, String date, String sex, String alias);
     List<Usuario> usuarios();
+    boolean verify(Usuario user);
+    void insertData(Usuario user);
 }
