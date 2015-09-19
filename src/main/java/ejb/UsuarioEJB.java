@@ -37,52 +37,7 @@ public class UsuarioEJB implements UsuarioEJBLocal{
         return userFacade.findAll();
     }
     
-    @Override
-    public void insertUserData(Usuario user, String mail, String name, String lastname, String pass, String date, String sex, String alias){
-            user.setEmailUser(mail);
-            user.setNombreRealUser(name);
-            user.setApellidoUser(lastname);
-            user.setPassUser(pass);
-            user.setAliasUser(alias);
-            try {
-                user.setFechaCumpleanosUser(fecha.FechaAngularToJava(date));
-            } catch (ParseException ex) {
-                Logger.getLogger(UsuarioEJB.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            user.setFechaCreacionCuenta(fecha.fechaActual());
-            user.setFechaUltimaActualizacion(fecha.fechaActual());
-            user.setSexoUser(sex);
-            user.setCantidadAlbumesCreados(0);
-            user.setCantidadFotografiasSubidas(0);
-            user.setCantidadSeguidores(0);
-            user.setCantidadSeguidos(0);
-            user.setDireccionFotoPerfilUser(GlobalVariables.photoPath+GlobalVariables.defaultProfilePhoto);
-            user.setDireccionFotoPortadaUser(GlobalVariables.photoPath+GlobalVariables.defaultFrontPhoto);
-            this.userFacade.create(user);
-    }
- 
-    
-    @Override
-    public String Registro(String mail, String name, String lastname, String pass, String date, String sex, String alias){
-        List <Usuario> list =this.userFacade.findAll();
-        
-            int largo=list.size();
-            int contador=0;
-            while(largo!=0){
-                if(mail.equals(list.get(contador).getEmailUser()) || alias.equals(list.get(contador).getAliasUser())){
-                    return "no";
-                }
-                largo--;
-                contador++;
-            }
-            
-        Usuario user = new Usuario();
-        insertUserData(user, mail, name, lastname, pass, date, sex, alias);
-        albumEJB.insertaAlbumDefault(user);
-        
-        return "si";
-    }
-    
+  
     @Override
     public void insertData(Usuario user){
             
@@ -95,6 +50,7 @@ public class UsuarioEJB implements UsuarioEJBLocal{
             user.setDireccionFotoPerfilUser(GlobalVariables.photoPath+GlobalVariables.defaultProfilePhoto);
             user.setDireccionFotoPortadaUser(GlobalVariables.photoPath+GlobalVariables.defaultFrontPhoto);
             this.userFacade.create(user);
+            this.albumEJB.insertaAlbumDefault(user);
     }
     
     @Override
@@ -115,45 +71,50 @@ public class UsuarioEJB implements UsuarioEJBLocal{
     }
     
     @Override
-    public String Login(String mail, String pass){
+    public boolean Login(Usuario user){
         List <Usuario> list = this.userFacade.findAll();
             int largo=list.size();
             int contador=0;
             while(largo!=0){
-                if(mail.equals(list.get(contador).getEmailUser()) && pass.equals(list.get(contador).getPassUser())){
+                if(user.getAliasUser().equals(list.get(contador).getAliasUser()) && user.getPassUser().equals(list.get(contador).getPassUser())){
                    
-                    return "si";
+                    return true;
                 }
                 contador++;
                 largo--;
             }
-            return "no";    
+            return false;    
         
         
     }
     
     @Override
-    public String editarPerfil(int idUser, String name, String lastname, String pass, String sex, String alias){
+    public Usuario sendInfo(Usuario user){
+        return userFacade.find(user.getIdUser());
+    }
+    
+    @Override
+    public boolean editarPerfil(Usuario user){
         List <Usuario> list =this.userFacade.findAll();
         int largo=list.size();
         int contador=0;
         while(largo!=0){
-            if(alias.equals(list.get(contador).getAliasUser())){
-                return "no";
+            if(user.getAliasUser().equals(list.get(contador).getAliasUser())){
+                return false;
             }
             largo--;
         contador++;
         }
-        Object id=idUser;
-        Usuario user=this.userFacade.find(id);
-        user.setNombreRealUser(name);
-        user.setApellidoUser(lastname);
-        user.setPassUser(pass);
-        user.setSexoUser(sex);
-        user.setAliasUser(alias);
-        user.setFechaUltimaActualizacion(fecha.fechaActual());
-        this.userFacade.edit(user);
-        return "si";
+        
+        Usuario usuario=this.userFacade.find(user.getIdUser());
+        usuario.setNombreRealUser(user.getNombreRealUser());
+        usuario.setApellidoUser(user.getApellidoUser());
+        usuario.setPassUser(user.getPassUser());
+        usuario.setSexoUser(user.getSexoUser());
+        usuario.setAliasUser(user.getAliasUser());
+        usuario.setFechaUltimaActualizacion(fecha.fechaActual());
+        this.userFacade.edit(usuario);
+        return true;
     }
     
 }

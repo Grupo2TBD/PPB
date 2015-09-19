@@ -16,11 +16,7 @@ import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import model.Camara;
 import model.Fotografia;
-import model.PermisoFotografia;
-import model.Privacidad;
-import model.TipoClasificacion;
 import model.Usuario;
 
 /**
@@ -76,13 +72,27 @@ public class FotografiaEJB implements FotografiaEJBLocal{
     }
     
     @Override
-    public void uploadPhoto(String dateFrom, String title, String description, String format,int idPrivacy,int idUsuario,int idPermiso){
-        Fotografia photo = new Fotografia();
-        photo.setIdPrivacidad(this.privacyFacade.find(idPrivacy));
-        photo.setIdUser(this.userFacade.find(idUsuario));
-        photo.setIdTipoClasificacion(this.clasificacionFacade.find(0));
-        photo.setIdPermisoFotografia(this.permisoFotoFacade.find(idPermiso));
-        insertPhotoInfo(dateFrom, title, description, format, photo, idUsuario);
+    public void uploadPhoto(Usuario user, Fotografia photo){
+        Fotografia newPhoto = new Fotografia();
+        newPhoto.setIdPrivacidad(this.privacyFacade.find(photo.getIdPrivacidad()));
+        newPhoto.setIdUser(this.userFacade.find(user.getIdUser()));
+        newPhoto.setIdTipoClasificacion(this.clasificacionFacade.find(0));
+        newPhoto.setIdPermisoFotografia(this.permisoFotoFacade.find(photo.getIdPermisoFotografia()));
+        newPhoto.setFechaSubidaPhoto(fecha.fechaActual());
+        //cambiar formato de fecha tomada
+        newPhoto.setCantidadVisitasPhoto(0);
+        newPhoto.setTituloPhoto(photo.getTituloPhoto());
+        newPhoto.setDescripcionPhoto(photo.getDescripcionPhoto());
+        newPhoto.setCantidadFavoritosPhoto(0);
+        newPhoto.setFormatoPhoto(photo.getFormatoPhoto());
+        newPhoto.setUltimaActualizacionPhoto(fecha.fechaActual());
+        newPhoto.setCantidadCompartidos(0);
+        newPhoto.setCantidadDescargadas(0);
+        newPhoto.setCantidadComentariosPositivos(0);
+        newPhoto.setCantidadComentariosNegativos(0);
+        newPhoto.setCantidadComentariosNeutros(0);
+        this.photoFacade.create(newPhoto);
+        albumEJB.buscaAlbum(user, photo);
         
     }
     

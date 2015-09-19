@@ -57,31 +57,8 @@ public class prueba {
     @EJB
     UsuarioEJBFacade userFacade;
     
-    
-    //CU1
-    @POST
-    @Path("/registro")
-    @Consumes({"application/json"})
-    public void create(Usuario entity){
-        
-        usuarioEJB.Registro(entity.getEmailUser(),entity.getNombreRealUser(),entity.getApellidoUser(),entity.getPassUser(),entity.getPassUser(),entity.getSexoUser(),entity.getAliasUser());
-        
-    }
-    
-    //CU2
-    @GET
-    @Path("/editarPerfil")
-    @Produces({"application/json"})
-    public String editProfileData() {
-        int idUsuario=4;
-        String name="ian";
-        String lastname="Orellana";
-        String pass="contraseña";
-        String sex="m";
-        String alias="rojo";
-        return usuarioEJB.editarPerfil(idUsuario,name,lastname,pass,sex,alias);
-        
-    }
+  
+ 
     
     //CU4--------->Arreglar ruta
     @GET
@@ -110,30 +87,7 @@ public class prueba {
     }
     
     
-    //CU17---------------------->Pensar lo del formato----Añadir detalles
-    @GET
-    @Path("/subirFoto")
-    public void uploadService() {
-       String dateFrom="23/06/1994";
-       String title="titulo";
-       String descripcion="playa";
-       String format="png";
-       int idPrivacidad=0;
-       int idUsuario=4;
-       int idPermiso=0;
-       
-       Camara camara=new Camara();
-       String nombreCamara="XT1000";
-       int MgPx=10;
-       int zoom=19;
-       int pantalla=12;
-       String tipoGuardado="tipo";////----->WTF?
-       String marca="Samsung";
-       int peso=12;
-       camara=camaraEJB.insertCamera(nombreCamara, MgPx, zoom, pantalla,tipoGuardado, marca, peso);
-       fotografiaEJB.uploadPhoto(dateFrom,title,descripcion,format,idPrivacidad,idUsuario,idPermiso);
-        
-    }
+
     
     
     //CU18
@@ -149,18 +103,7 @@ public class prueba {
         
     }
     
-    
-    //CU19
-    @GET
-    @Path("/login")
-    @Produces({"application/json"})
-    public String login(){
-        String mail="ian@tbd.cl";
-        String pass="pass";
-        return usuarioEJB.Login(mail, pass);
-    
-    }
-    
+   
     @GET
     @Path("/users")
     @Produces(MediaType.APPLICATION_JSON)
@@ -172,14 +115,14 @@ public class prueba {
     @GET
     @Path("/get")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getMethod(){
-        JsonObjectBuilder jsonObjBuilder = Json.createObjectBuilder();
-        jsonObjBuilder.add("message", "get method ok");
-        jsonObjBuilder.add("message", "get method ok");
+    public Usuario getMethod(){
+        //JsonObjectBuilder jsonObjBuilder = Json.createObjectBuilder();
+        //jsonObjBuilder.add("message", "get method ok");
         
-        JsonObject jsonObj = jsonObjBuilder.build();
-        
-        return Response.status(Response.Status.OK).entity(jsonObj.toString()).build();
+        //JsonObject jsonObj = jsonObjBuilder.build();
+        Usuario usuario = this.userFacade.find(15);
+        //return Response.status(Response.Status.OK).entity(usuario.toString()).build();
+        return usuario;
     }
     
     @POST

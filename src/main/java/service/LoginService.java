@@ -8,9 +8,15 @@ package service;
 
 import ejb.UsuarioEJBLocal;
 import javax.ejb.EJB;
-import javax.ws.rs.GET;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+import model.Usuario;
 
 /**
  *
@@ -23,10 +29,17 @@ public class LoginService {
     UsuarioEJBLocal userEJB;
     
     
-    @GET//@POST
+    @POST
+    @Consumes({"application/json"})
     @Produces({"application/json"})
-    public String registro(){
-        return userEJB.Login("ian@tbd.cl","pass");
+    public Response login(Usuario user){
+        JsonObjectBuilder jsonObjBuilder = Json.createObjectBuilder();
+        jsonObjBuilder.add( "message", userEJB.Login(user));
+        
+ 
+        JsonObject jsonObj = jsonObjBuilder.build();
+ 
+        return Response.status( Response.Status.CREATED ).entity( jsonObj ).build();
     }
     
     

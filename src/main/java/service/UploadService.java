@@ -7,8 +7,11 @@ package service;
 
 import ejb.FotografiaEJBLocal;
 import javax.ejb.EJB;
-import javax.ws.rs.GET;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import model.Fotografia;
+import model.Usuario;
 
 /**
  *
@@ -17,13 +20,14 @@ import javax.ws.rs.Path;
 @Path("/upload")
 public class UploadService {
     @EJB
-    FotografiaEJBLocal upload;
+    FotografiaEJBLocal fotografiaEJB;
     
-    
-    @GET
-    public void uploadService() {
-        upload.uploadPhoto("23/06/1994", "En la playa", "Descripciónde la foto", "png",0,18,16);
-        
+    /////////////Pensar en formato 
+    @POST
+    @Consumes({"application/json"})
+    public void uploadService(Usuario user, Fotografia photo) {
+         
+        this.fotografiaEJB.uploadPhoto(user, photo);
     }
     
 }

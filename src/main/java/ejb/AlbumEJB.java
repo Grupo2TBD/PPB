@@ -77,7 +77,7 @@ public class AlbumEJB implements AlbumEJBLocal{
         int largo=list.size();
         int contador=0;
         while(largo!=0){
-            if(user.equals(list.get(contador).getIdUser()) && "Fotografías".equals(list.get(contador).getNombreAlbum())){
+            if(user.getIdUser()==list.get(contador).getIdUser().getIdUser() && "Fotografías".equals(list.get(contador).getNombreAlbum())){
                 AFK.setIdAlbum(list.get(contador).getIdAlbum());
                 AFK.setIdPhoto(photo.getIdPhoto());
                 AF.setFotografia(photo);

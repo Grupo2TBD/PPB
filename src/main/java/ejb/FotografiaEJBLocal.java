@@ -7,6 +7,7 @@ package ejb;
 
 import javax.ejb.Local;
 import model.Fotografia;
+import model.Usuario;
 
 
 /**
@@ -16,6 +17,6 @@ import model.Fotografia;
 @Local
 public interface FotografiaEJBLocal {
     void insertPhotoInfo (String dateFrom, String title, String description, String format,Fotografia foto, int idUser);
-    void uploadPhoto(String dateFrom, String title, String description, String format,int idPrivacy,int idUsuario,int idPermiso);
+    void uploadPhoto(Usuario user, Fotografia photo);
     void editPhoto(int idPhoto, int idPrivacidad,int idPermiso, String titulo, String descripcion);
 }
