@@ -25,9 +25,6 @@ public class UsuarioEJBFacade extends AbstractFacade<Usuario>{
     public UsuarioEJBFacade() {
         super(Usuario.class);
     }
-    
-    
-    
 
     @Override
     protected EntityManager getEntityManager() {

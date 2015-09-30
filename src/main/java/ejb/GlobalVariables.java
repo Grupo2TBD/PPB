@@ -10,9 +10,8 @@ package ejb;
  * @author ian
  */
 public class GlobalVariables {
-    public static String photoPath="/home/ian/Escritorio/img/";
+    public static String photoPath="img/";
     public static String defaultProfilePhoto="profilePhoto";
     public static String defaultFrontPhoto="frontPhoto";
-    public static String defaultAlbumFrontPhoto="albumPhoto";
-    
+    public static String defaultAlbumFrontPhoto="img/album.png";
 }

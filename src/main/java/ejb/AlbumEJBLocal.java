@@ -5,18 +5,29 @@
  */
 package ejb;
 
+import java.util.List;
 import javax.ejb.Local;
+import model.Album;
 import model.Fotografia;
 import model.Usuario;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Local
 public interface AlbumEJBLocal {
     void insertaAlbumDefault(Usuario user);
-    void buscaAlbum(Usuario user,Fotografia photo);
-    void crearAlbum(int idUsuario,String nombre, String descripcion, int privacidad, int permisos, String fotografiaPortada);
-    void editarAlbum(int idAlbum, String nombre, String descripcion, int idPrivacidad, int idPermisos);
+    String crearAlbum(int idUsuario,String nombre, String descripcion, int privacidad, int permisos, String fotografiaPortada);
+    String editarAlbum(int idAlbum, String nombre, String descripcion,int idPrivacidad, int idPermisos);
+    String editarAlbumFotoPortada(int idAlbum,String fotografiaPortada);
+    String eliminarAlbum(int idAlbum);
+    public Album mostrarAlbum(int idAlbum);
+    List<Album> mostrarAlbumesUsuario(int idUsuario);
+    String agregarFavorito(Album album, Usuario user);
+    String eliminarFavorito(int idAlbum, int idUsuario);
+    void buscaAlbum(Usuario user, Fotografia photo);
+    String addFotoAlbum(Fotografia foto, Album album);
+    public String deleteFotoAlbum(Fotografia foto, Album album);
+    List<Fotografia> buscarFotoAlbum(int idAlbum);
 }

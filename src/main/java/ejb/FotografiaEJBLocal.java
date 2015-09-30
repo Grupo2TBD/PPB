@@ -5,18 +5,36 @@
  */
 package ejb;
 
+import java.util.List;
 import javax.ejb.Local;
+import javax.ws.rs.core.Response;
+import model.Camara;
 import model.Fotografia;
+import model.PermisoFotografia;
+import model.Privacidad;
+import model.Tag;
 import model.Usuario;
-
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Local
 public interface FotografiaEJBLocal {
-    void insertPhotoInfo (String dateFrom, String title, String description, String format,Fotografia foto, int idUser);
-    void uploadPhoto(Usuario user, Fotografia photo);
+    Fotografia mostrarFotografiaSeleccionada(int idFotografia);
+    List<Fotografia> mostrarFotografiasUsuario(int idUsuario);
+    List<Fotografia> FotoUsuarioOrdenadasFS(int idUsuario);
+    List<Fotografia> FotoUsuarioOrdenadasFT(int idUsuario);
+    String realizarComentario(Fotografia fotografiaAComentar, Usuario usuarioRealizador, String descripcion);
+    String eliminarComentario(int idComentario);
+    String agregarFavorito(Fotografia fotografia, Usuario usuario);
+    String eliminarFavorito(int idFotografia, int idUsuario);
+    Response DownloadPhoto(String id);
     void editPhoto(int idPhoto, int idPrivacidad,int idPermiso, String titulo, String descripcion);
+    List<Fotografia> findAll();
+    String insertPhotoInfo(Usuario user, Camara camara, Privacidad privacidad, PermisoFotografia permisoFoto, List<Tag> tags, String titulo, String descripcion);
+    void setRutaFoto(Fotografia foto);
+    String eliminarFoto(Fotografia foto);
+    List<Fotografia> buscaFotosSeguidos(Usuario user);
+    List<Fotografia> fotosSeguidosEtiqTerceros(Usuario user);
 }

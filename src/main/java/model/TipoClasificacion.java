@@ -8,24 +8,26 @@ package model;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Entity
-@Table(name = "TIPO_CLASIFICACION")
+@Table(name = "Tipo_Clasificacion")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TipoClasificacion.findAll", query = "SELECT t FROM TipoClasificacion t"),
@@ -34,17 +36,17 @@ import javax.xml.bind.annotation.XmlTransient;
 public class TipoClasificacion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID_TIPO_CLASIFICACION")
+    @Column(name = "id_tipo_clasificacion")
     private Integer idTipoClasificacion;
-    @Size(max = 20)
-    @Column(name = "TIPO_CLASIFICACION")
+    @Size(max = 45)
+    @Column(name = "tipo_clasificacion")
     private String tipoClasificacion;
-    @OneToMany(mappedBy = "idTipoClasificacion")
-    private Collection<Fotografia> fotografiaCollection;
-    @OneToMany(mappedBy = "idTipoClasificacion")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoClasificacionidtipoclasificacion")
     private Collection<ComentarioFotografia> comentarioFotografiaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoClasificacionidtipoclasificacion")
+    private Collection<Fotografia> fotografiaCollection;
 
     public TipoClasificacion() {
     }
@@ -70,21 +72,21 @@ public class TipoClasificacion implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Fotografia> getFotografiaCollection() {
-        return fotografiaCollection;
-    }
-
-    public void setFotografiaCollection(Collection<Fotografia> fotografiaCollection) {
-        this.fotografiaCollection = fotografiaCollection;
-    }
-
-    @XmlTransient
     public Collection<ComentarioFotografia> getComentarioFotografiaCollection() {
         return comentarioFotografiaCollection;
     }
 
     public void setComentarioFotografiaCollection(Collection<ComentarioFotografia> comentarioFotografiaCollection) {
         this.comentarioFotografiaCollection = comentarioFotografiaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Fotografia> getFotografiaCollection() {
+        return fotografiaCollection;
+    }
+
+    public void setFotografiaCollection(Collection<Fotografia> fotografiaCollection) {
+        this.fotografiaCollection = fotografiaCollection;
     }
 
     @Override

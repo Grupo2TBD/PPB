@@ -13,48 +13,48 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Embeddable
 public class AlbumFotografiaPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID_ALBUM")
-    private int idAlbum;
+    @Column(name = "Album_id_album")
+    private int albumidalbum;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID_PHOTO")
-    private int idPhoto;
+    @Column(name = "Fotografia_id_photo")
+    private int fotografiaidphoto;
 
     public AlbumFotografiaPK() {
     }
 
-    public AlbumFotografiaPK(int idAlbum, int idPhoto) {
-        this.idAlbum = idAlbum;
-        this.idPhoto = idPhoto;
+    public AlbumFotografiaPK(int albumidalbum, int fotografiaidphoto) {
+        this.albumidalbum = albumidalbum;
+        this.fotografiaidphoto = fotografiaidphoto;
     }
 
-    public int getIdAlbum() {
-        return idAlbum;
+    public int getAlbumidalbum() {
+        return albumidalbum;
     }
 
-    public void setIdAlbum(int idAlbum) {
-        this.idAlbum = idAlbum;
+    public void setAlbumidalbum(int albumidalbum) {
+        this.albumidalbum = albumidalbum;
     }
 
-    public int getIdPhoto() {
-        return idPhoto;
+    public int getFotografiaidphoto() {
+        return fotografiaidphoto;
     }
 
-    public void setIdPhoto(int idPhoto) {
-        this.idPhoto = idPhoto;
+    public void setFotografiaidphoto(int fotografiaidphoto) {
+        this.fotografiaidphoto = fotografiaidphoto;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) idAlbum;
-        hash += (int) idPhoto;
+        hash += (int) albumidalbum;
+        hash += (int) fotografiaidphoto;
         return hash;
     }
 
@@ -65,10 +65,10 @@ public class AlbumFotografiaPK implements Serializable {
             return false;
         }
         AlbumFotografiaPK other = (AlbumFotografiaPK) object;
-        if (this.idAlbum != other.idAlbum) {
+        if (this.albumidalbum != other.albumidalbum) {
             return false;
         }
-        if (this.idPhoto != other.idPhoto) {
+        if (this.fotografiaidphoto != other.fotografiaidphoto) {
             return false;
         }
         return true;
@@ -76,7 +76,7 @@ public class AlbumFotografiaPK implements Serializable {
 
     @Override
     public String toString() {
-        return "model.AlbumFotografiaPK[ idAlbum=" + idAlbum + ", idPhoto=" + idPhoto + " ]";
+        return "model.AlbumFotografiaPK[ albumidalbum=" + albumidalbum + ", fotografiaidphoto=" + fotografiaidphoto + " ]";
     }
     
 }

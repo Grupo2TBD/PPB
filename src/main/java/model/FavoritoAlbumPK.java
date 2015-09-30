@@ -13,48 +13,48 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Embeddable
 public class FavoritoAlbumPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID_ALBUM")
-    private int idAlbum;
+    @Column(name = "Usuario_id_user")
+    private int usuarioiduser;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID_USER")
-    private int idUser;
+    @Column(name = "Album_id_album")
+    private int albumidalbum;
 
     public FavoritoAlbumPK() {
     }
 
-    public FavoritoAlbumPK(int idAlbum, int idUser) {
-        this.idAlbum = idAlbum;
-        this.idUser = idUser;
+    public FavoritoAlbumPK(int usuarioiduser, int albumidalbum) {
+        this.usuarioiduser = usuarioiduser;
+        this.albumidalbum = albumidalbum;
     }
 
-    public int getIdAlbum() {
-        return idAlbum;
+    public int getUsuarioiduser() {
+        return usuarioiduser;
     }
 
-    public void setIdAlbum(int idAlbum) {
-        this.idAlbum = idAlbum;
+    public void setUsuarioiduser(int usuarioiduser) {
+        this.usuarioiduser = usuarioiduser;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public int getAlbumidalbum() {
+        return albumidalbum;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setAlbumidalbum(int albumidalbum) {
+        this.albumidalbum = albumidalbum;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) idAlbum;
-        hash += (int) idUser;
+        hash += (int) usuarioiduser;
+        hash += (int) albumidalbum;
         return hash;
     }
 
@@ -65,10 +65,10 @@ public class FavoritoAlbumPK implements Serializable {
             return false;
         }
         FavoritoAlbumPK other = (FavoritoAlbumPK) object;
-        if (this.idAlbum != other.idAlbum) {
+        if (this.usuarioiduser != other.usuarioiduser) {
             return false;
         }
-        if (this.idUser != other.idUser) {
+        if (this.albumidalbum != other.albumidalbum) {
             return false;
         }
         return true;
@@ -76,7 +76,7 @@ public class FavoritoAlbumPK implements Serializable {
 
     @Override
     public String toString() {
-        return "model.FavoritoAlbumPK[ idAlbum=" + idAlbum + ", idUser=" + idUser + " ]";
+        return "model.FavoritoAlbumPK[ usuarioiduser=" + usuarioiduser + ", albumidalbum=" + albumidalbum + " ]";
     }
     
 }

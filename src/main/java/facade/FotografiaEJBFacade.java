@@ -4,34 +4,28 @@
  * and open the template in the editor.
  */
 package facade;
+ 
 
-/**
- *
- * @author ian
- */
-
-
+ 
+ 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import model.Fotografia;
-
+ 
+import model.Usuario;
+ 
 @Stateless
-public class FotografiaEJBFacade extends AbstractFacade<Fotografia>{
-
+public class FotografiaEJBFacade extends AbstractFacade<Usuario>{
+ 
         @PersistenceContext(unitName = "ian")
-	private EntityManager em;
+        private EntityManager em;
     public FotografiaEJBFacade() {
-        super(Fotografia.class);
+        super(Usuario.class);
     }
-    
-    
-    
-
+   
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+   
 }

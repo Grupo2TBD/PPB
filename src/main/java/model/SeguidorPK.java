@@ -13,48 +13,48 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Embeddable
 public class SeguidorPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID_USER")
-    private int idUser;
+    @Column(name = "Usuario_id_user")
+    private int usuarioiduser;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "USU_ID_USER")
-    private int usuIdUser;
+    @Column(name = "Usuario_id_user1")
+    private int usuarioiduser1;
 
     public SeguidorPK() {
     }
 
-    public SeguidorPK(int idUser, int usuIdUser) {
-        this.idUser = idUser;
-        this.usuIdUser = usuIdUser;
+    public SeguidorPK(int usuarioiduser, int usuarioiduser1) {
+        this.usuarioiduser = usuarioiduser;
+        this.usuarioiduser1 = usuarioiduser1;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public int getUsuarioiduser() {
+        return usuarioiduser;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUsuarioiduser(int usuarioiduser) {
+        this.usuarioiduser = usuarioiduser;
     }
 
-    public int getUsuIdUser() {
-        return usuIdUser;
+    public int getUsuarioiduser1() {
+        return usuarioiduser1;
     }
 
-    public void setUsuIdUser(int usuIdUser) {
-        this.usuIdUser = usuIdUser;
+    public void setUsuarioiduser1(int usuarioiduser1) {
+        this.usuarioiduser1 = usuarioiduser1;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) idUser;
-        hash += (int) usuIdUser;
+        hash += (int) usuarioiduser;
+        hash += (int) usuarioiduser1;
         return hash;
     }
 
@@ -65,10 +65,10 @@ public class SeguidorPK implements Serializable {
             return false;
         }
         SeguidorPK other = (SeguidorPK) object;
-        if (this.idUser != other.idUser) {
+        if (this.usuarioiduser != other.usuarioiduser) {
             return false;
         }
-        if (this.usuIdUser != other.usuIdUser) {
+        if (this.usuarioiduser1 != other.usuarioiduser1) {
             return false;
         }
         return true;
@@ -76,7 +76,7 @@ public class SeguidorPK implements Serializable {
 
     @Override
     public String toString() {
-        return "model.SeguidorPK[ idUser=" + idUser + ", usuIdUser=" + usuIdUser + " ]";
+        return "model.SeguidorPK[ usuarioiduser=" + usuarioiduser + ", usuarioiduser1=" + usuarioiduser1 + " ]";
     }
     
 }

@@ -21,27 +21,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Entity
-@Table(name = "SEGUIDOR")
+@Table(name = "Seguidor")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Seguidor.findAll", query = "SELECT s FROM Seguidor s"),
-    @NamedQuery(name = "Seguidor.findByIdUser", query = "SELECT s FROM Seguidor s WHERE s.seguidorPK.idUser = :idUser"),
-    @NamedQuery(name = "Seguidor.findByUsuIdUser", query = "SELECT s FROM Seguidor s WHERE s.seguidorPK.usuIdUser = :usuIdUser"),
+    @NamedQuery(name = "Seguidor.findByUsuarioiduser", query = "SELECT s FROM Seguidor s WHERE s.seguidorPK.usuarioiduser = :usuarioiduser"),
+    @NamedQuery(name = "Seguidor.findByUsuarioiduser1", query = "SELECT s FROM Seguidor s WHERE s.seguidorPK.usuarioiduser1 = :usuarioiduser1"),
     @NamedQuery(name = "Seguidor.findByFechaFollow", query = "SELECT s FROM Seguidor s WHERE s.fechaFollow = :fechaFollow")})
 public class Seguidor implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected SeguidorPK seguidorPK;
-    @Column(name = "FECHA_FOLLOW")
+    @Column(name = "fecha_follow")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaFollow;
-    @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER", insertable = false, updatable = false)
+    @JoinColumn(name = "Usuario_id_user", referencedColumnName = "id_user", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Usuario usuario;
-    @JoinColumn(name = "USU_ID_USER", referencedColumnName = "ID_USER", insertable = false, updatable = false)
+    @JoinColumn(name = "Usuario_id_user1", referencedColumnName = "id_user", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Usuario usuario1;
 
@@ -52,8 +52,8 @@ public class Seguidor implements Serializable {
         this.seguidorPK = seguidorPK;
     }
 
-    public Seguidor(int idUser, int usuIdUser) {
-        this.seguidorPK = new SeguidorPK(idUser, usuIdUser);
+    public Seguidor(int usuarioiduser, int usuarioiduser1) {
+        this.seguidorPK = new SeguidorPK(usuarioiduser, usuarioiduser1);
     }
 
     public SeguidorPK getSeguidorPK() {

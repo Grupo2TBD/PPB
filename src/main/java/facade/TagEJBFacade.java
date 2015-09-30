@@ -5,34 +5,44 @@
  */
 package facade;
 
-/**
- *
- * @author ian
- */
-
-
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import model.Tag;
 
+/**
+ *
+ * @author sebastian
+ */
 @Stateless
 public class TagEJBFacade extends AbstractFacade<Tag>{
-
-        @PersistenceContext(unitName = "ian")
-	private EntityManager em;
+    
+    @PersistenceContext(unitName = "ian")
+    private EntityManager em;
     public TagEJBFacade() {
         super(Tag.class);
     }
     
     
-    
-
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
     
+    public Tag buscarNombre(String nombre){
+        
+        List<Tag> tag = em.createNamedQuery("Tag.findByNombreTag")
+                .setParameter("nombreTag", nombre)
+                .getResultList();
+        if(tag.isEmpty()){
+            return null;
+        }
+        else{
+            return tag.get(0);
+        }
+       
+                
+    }
+    
 }
-

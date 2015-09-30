@@ -5,30 +5,24 @@
  */
 package facade;
 
-/**
- *
- * @author ian
- */
-
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import model.Privacidad;
 
+/**
+ *
+ * @author sebastian
+ */
 @Stateless
 public class PrivacidadEJBFacade extends AbstractFacade<Privacidad>{
 
-        @PersistenceContext(unitName = "ian")
-	private EntityManager em;
+    @PersistenceContext(unitName = "ian")
+    private EntityManager em;
     public PrivacidadEJBFacade() {
         super(Privacidad.class);
     }
     
-    
-    
-
     @Override
     protected EntityManager getEntityManager() {
         return em;

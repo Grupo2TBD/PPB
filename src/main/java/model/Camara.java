@@ -24,10 +24,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Entity
-@Table(name = "CAMARA")
+@Table(name = "Camara")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Camara.findAll", query = "SELECT c FROM Camara c"),
@@ -35,45 +35,43 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Camara.findByMegapixelesCamara", query = "SELECT c FROM Camara c WHERE c.megapixelesCamara = :megapixelesCamara"),
     @NamedQuery(name = "Camara.findByZoomCamara", query = "SELECT c FROM Camara c WHERE c.zoomCamara = :zoomCamara"),
     @NamedQuery(name = "Camara.findByTamanoPantallaCamara", query = "SELECT c FROM Camara c WHERE c.tamanoPantallaCamara = :tamanoPantallaCamara"),
-    @NamedQuery(name = "Camara.findByTipoGuardadoCamara", query = "SELECT c FROM Camara c WHERE c.tipoGuardadoCamara = :tipoGuardadoCamara"),
-    @NamedQuery(name = "Camara.findByDireccionImagenCamara", query = "SELECT c FROM Camara c WHERE c.direccionImagenCamara = :direccionImagenCamara"),
     @NamedQuery(name = "Camara.findByNombreCamara", query = "SELECT c FROM Camara c WHERE c.nombreCamara = :nombreCamara"),
-    @NamedQuery(name = "Camara.findByMarcaCamara", query = "SELECT c FROM Camara c WHERE c.marcaCamara = :marcaCamara"),
     @NamedQuery(name = "Camara.findByPesoCamara", query = "SELECT c FROM Camara c WHERE c.pesoCamara = :pesoCamara"),
-    @NamedQuery(name = "Camara.findByCantidadFotografiasCamara", query = "SELECT c FROM Camara c WHERE c.cantidadFotografiasCamara = :cantidadFotografiasCamara")})
+    @NamedQuery(name = "Camara.findByCantidadFotografiasCamara", query = "SELECT c FROM Camara c WHERE c.cantidadFotografiasCamara = :cantidadFotografiasCamara"),
+    @NamedQuery(name = "Camara.findByMarcaCamara", query = "SELECT c FROM Camara c WHERE c.marcaCamara = :marcaCamara"),
+    @NamedQuery(name = "Camara.findByDireccionImagenCamara", query = "SELECT c FROM Camara c WHERE c.direccionImagenCamara = :direccionImagenCamara")})
 public class Camara implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_CAMARA")
+    @Column(name = "id_camara")
     private Integer idCamara;
-    @Column(name = "MEGAPIXELES_CAMARA")
-    private Integer megapixelesCamara;
-    @Column(name = "ZOOM_CAMARA")
-    private Integer zoomCamara;
-    @Column(name = "TAMANO_PANTALLA_CAMARA")
-    private Integer tamanoPantallaCamara;
     @Size(max = 20)
-    @Column(name = "TIPO_GUARDADO_CAMARA")
-    private String tipoGuardadoCamara;
-    @Size(max = 50)
-    @Column(name = "DIRECCION_IMAGEN_CAMARA")
-    private String direccionImagenCamara;
+    @Column(name = "megapixeles_camara")
+    private String megapixelesCamara;
     @Size(max = 20)
-    @Column(name = "NOMBRE_CAMARA")
+    @Column(name = "zoom_camara")
+    private String zoomCamara;
+    @Size(max = 20)
+    @Column(name = "tamano_pantalla_camara")
+    private String tamanoPantallaCamara;
+    @Size(max = 20)
+    @Column(name = "nombre_camara")
     private String nombreCamara;
-    @Size(max = 20)
-    @Column(name = "MARCA_CAMARA")
-    private String marcaCamara;
-    @Column(name = "PESO_CAMARA")
-    private Integer pesoCamara;
-    @Column(name = "CANTIDAD_FOTOGRAFIAS_CAMARA")
+    @Size(max = 10)
+    @Column(name = "peso_camara")
+    private String pesoCamara;
+    @Column(name = "cantidad_fotografias_camara")
     private Integer cantidadFotografiasCamara;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCamara")
+    @Size(max = 20)
+    @Column(name = "marca_camara")
+    private String marcaCamara;
+    @Size(max = 50)
+    @Column(name = "direccion_imagen_camara")
+    private String direccionImagenCamara;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "camaraidcamara")
     private Collection<Fotografia> fotografiaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "camara")
-    private Collection<Exif> exifCollection;
 
     public Camara() {
     }
@@ -90,44 +88,28 @@ public class Camara implements Serializable {
         this.idCamara = idCamara;
     }
 
-    public Integer getMegapixelesCamara() {
+    public String getMegapixelesCamara() {
         return megapixelesCamara;
     }
 
-    public void setMegapixelesCamara(Integer megapixelesCamara) {
+    public void setMegapixelesCamara(String megapixelesCamara) {
         this.megapixelesCamara = megapixelesCamara;
     }
 
-    public Integer getZoomCamara() {
+    public String getZoomCamara() {
         return zoomCamara;
     }
 
-    public void setZoomCamara(Integer zoomCamara) {
+    public void setZoomCamara(String zoomCamara) {
         this.zoomCamara = zoomCamara;
     }
 
-    public Integer getTamanoPantallaCamara() {
+    public String getTamanoPantallaCamara() {
         return tamanoPantallaCamara;
     }
 
-    public void setTamanoPantallaCamara(Integer tamanoPantallaCamara) {
+    public void setTamanoPantallaCamara(String tamanoPantallaCamara) {
         this.tamanoPantallaCamara = tamanoPantallaCamara;
-    }
-
-    public String getTipoGuardadoCamara() {
-        return tipoGuardadoCamara;
-    }
-
-    public void setTipoGuardadoCamara(String tipoGuardadoCamara) {
-        this.tipoGuardadoCamara = tipoGuardadoCamara;
-    }
-
-    public String getDireccionImagenCamara() {
-        return direccionImagenCamara;
-    }
-
-    public void setDireccionImagenCamara(String direccionImagenCamara) {
-        this.direccionImagenCamara = direccionImagenCamara;
     }
 
     public String getNombreCamara() {
@@ -138,19 +120,11 @@ public class Camara implements Serializable {
         this.nombreCamara = nombreCamara;
     }
 
-    public String getMarcaCamara() {
-        return marcaCamara;
-    }
-
-    public void setMarcaCamara(String marcaCamara) {
-        this.marcaCamara = marcaCamara;
-    }
-
-    public Integer getPesoCamara() {
+    public String getPesoCamara() {
         return pesoCamara;
     }
 
-    public void setPesoCamara(Integer pesoCamara) {
+    public void setPesoCamara(String pesoCamara) {
         this.pesoCamara = pesoCamara;
     }
 
@@ -162,6 +136,22 @@ public class Camara implements Serializable {
         this.cantidadFotografiasCamara = cantidadFotografiasCamara;
     }
 
+    public String getMarcaCamara() {
+        return marcaCamara;
+    }
+
+    public void setMarcaCamara(String marcaCamara) {
+        this.marcaCamara = marcaCamara;
+    }
+
+    public String getDireccionImagenCamara() {
+        return direccionImagenCamara;
+    }
+
+    public void setDireccionImagenCamara(String direccionImagenCamara) {
+        this.direccionImagenCamara = direccionImagenCamara;
+    }
+
     @XmlTransient
     public Collection<Fotografia> getFotografiaCollection() {
         return fotografiaCollection;
@@ -169,15 +159,6 @@ public class Camara implements Serializable {
 
     public void setFotografiaCollection(Collection<Fotografia> fotografiaCollection) {
         this.fotografiaCollection = fotografiaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Exif> getExifCollection() {
-        return exifCollection;
-    }
-
-    public void setExifCollection(Collection<Exif> exifCollection) {
-        this.exifCollection = exifCollection;
     }
 
     @Override

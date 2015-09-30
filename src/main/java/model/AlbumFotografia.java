@@ -21,27 +21,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Entity
-@Table(name = "ALBUM_FOTOGRAFIA")
+@Table(name = "Album_Fotografia")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "AlbumFotografia.findAll", query = "SELECT a FROM AlbumFotografia a"),
-    @NamedQuery(name = "AlbumFotografia.findByIdAlbum", query = "SELECT a FROM AlbumFotografia a WHERE a.albumFotografiaPK.idAlbum = :idAlbum"),
-    @NamedQuery(name = "AlbumFotografia.findByIdPhoto", query = "SELECT a FROM AlbumFotografia a WHERE a.albumFotografiaPK.idPhoto = :idPhoto"),
-    @NamedQuery(name = "AlbumFotografia.findByFechaAgregadoAlbum", query = "SELECT a FROM AlbumFotografia a WHERE a.fechaAgregadoAlbum = :fechaAgregadoAlbum")})
+    @NamedQuery(name = "AlbumFotografia.findByFechaAgregadoAlbum", query = "SELECT a FROM AlbumFotografia a WHERE a.fechaAgregadoAlbum = :fechaAgregadoAlbum"),
+    @NamedQuery(name = "AlbumFotografia.findByAlbumidalbum", query = "SELECT a FROM AlbumFotografia a WHERE a.albumFotografiaPK.albumidalbum = :albumidalbum"),
+    @NamedQuery(name = "AlbumFotografia.findByFotografiaidphoto", query = "SELECT a FROM AlbumFotografia a WHERE a.albumFotografiaPK.fotografiaidphoto = :fotografiaidphoto")})
 public class AlbumFotografia implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected AlbumFotografiaPK albumFotografiaPK;
-    @Column(name = "FECHA_AGREGADO_ALBUM")
+    @Column(name = "fecha_agregado_album")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaAgregadoAlbum;
-    @JoinColumn(name = "ID_ALBUM", referencedColumnName = "ID_ALBUM", insertable = false, updatable = false)
+    @JoinColumn(name = "Album_id_album", referencedColumnName = "id_album", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Album album;
-    @JoinColumn(name = "ID_PHOTO", referencedColumnName = "ID_PHOTO", insertable = false, updatable = false)
+    @JoinColumn(name = "Fotografia_id_photo", referencedColumnName = "id_photo", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Fotografia fotografia;
 
@@ -52,8 +52,8 @@ public class AlbumFotografia implements Serializable {
         this.albumFotografiaPK = albumFotografiaPK;
     }
 
-    public AlbumFotografia(int idAlbum, int idPhoto) {
-        this.albumFotografiaPK = new AlbumFotografiaPK(idAlbum, idPhoto);
+    public AlbumFotografia(int albumidalbum, int fotografiaidphoto) {
+        this.albumFotografiaPK = new AlbumFotografiaPK(albumidalbum, fotografiaidphoto);
     }
 
     public AlbumFotografiaPK getAlbumFotografiaPK() {

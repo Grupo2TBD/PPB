@@ -29,65 +29,60 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Entity
-@Table(name = "ALBUM")
+@Table(name = "Album")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Album.findAll", query = "SELECT a FROM Album a"),
     @NamedQuery(name = "Album.findByIdAlbum", query = "SELECT a FROM Album a WHERE a.idAlbum = :idAlbum"),
     @NamedQuery(name = "Album.findByNombreAlbum", query = "SELECT a FROM Album a WHERE a.nombreAlbum = :nombreAlbum"),
-    @NamedQuery(name = "Album.findByFechacreacionAlbum", query = "SELECT a FROM Album a WHERE a.fechacreacionAlbum = :fechacreacionAlbum"),
+    @NamedQuery(name = "Album.findByFechaCreacionAlbum", query = "SELECT a FROM Album a WHERE a.fechaCreacionAlbum = :fechaCreacionAlbum"),
     @NamedQuery(name = "Album.findByDescripcionAlbum", query = "SELECT a FROM Album a WHERE a.descripcionAlbum = :descripcionAlbum"),
     @NamedQuery(name = "Album.findByDireccionFotoPortadaAlbum", query = "SELECT a FROM Album a WHERE a.direccionFotoPortadaAlbum = :direccionFotoPortadaAlbum"),
     @NamedQuery(name = "Album.findByCantidadFotografiasAlbum", query = "SELECT a FROM Album a WHERE a.cantidadFotografiasAlbum = :cantidadFotografiasAlbum"),
     @NamedQuery(name = "Album.findByCantidadFavoritos", query = "SELECT a FROM Album a WHERE a.cantidadFavoritos = :cantidadFavoritos"),
-    @NamedQuery(name = "Album.findByCantidadComentarios", query = "SELECT a FROM Album a WHERE a.cantidadComentarios = :cantidadComentarios"),
     @NamedQuery(name = "Album.findByUltimaActualizacionAlbum", query = "SELECT a FROM Album a WHERE a.ultimaActualizacionAlbum = :ultimaActualizacionAlbum")})
 public class Album implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_ALBUM")
+    @Column(name = "id_album")
     private Integer idAlbum;
-    @Size(max = 20)
-    @Column(name = "NOMBRE_ALBUM")
+    @Size(max = 45)
+    @Column(name = "nombre_album")
     private String nombreAlbum;
-    @Column(name = "FECHACREACION_ALBUM")
+    @Column(name = "fecha_creacion_album")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechacreacionAlbum;
-    @Size(max = 30)
-    @Column(name = "DESCRIPCION_ALBUM")
+    private Date fechaCreacionAlbum;
+    @Size(max = 45)
+    @Column(name = "descripcion_album")
     private String descripcionAlbum;
-    @Size(max = 50)
-    @Column(name = "DIRECCION_FOTO_PORTADA_ALBUM")
+    @Size(max = 45)
+    @Column(name = "direccion_foto_portada_album")
     private String direccionFotoPortadaAlbum;
-    @Column(name = "CANTIDAD_FOTOGRAFIAS_ALBUM")
+    @Column(name = "cantidad_fotografias_album")
     private Integer cantidadFotografiasAlbum;
-    @Column(name = "CANTIDAD_FAVORITOS")
+    @Column(name = "cantidad_favoritos")
     private Integer cantidadFavoritos;
-    @Column(name = "CANTIDAD_COMENTARIOS")
-    private Integer cantidadComentarios;
-    @Column(name = "ULTIMA_ACTUALIZACION_ALBUM")
+    @Column(name = "ultima_actualizacion_album")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ultimaActualizacionAlbum;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
-    private Collection<FavoritoAlbum> favoritoAlbumCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
     private Collection<AlbumFotografia> albumFotografiaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAlbum")
-    private Collection<ComentarioAlbum> comentarioAlbumCollection;
-    @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER")
+    @JoinColumn(name = "Permiso_Album_id_permiso_album", referencedColumnName = "id_permiso_album")
     @ManyToOne(optional = false)
-    private Usuario idUser;
-    @JoinColumn(name = "ID_PERMISO_ALBUM", referencedColumnName = "ID_PERMISO_ALBUM")
-    @ManyToOne
-    private PermisoAlbum idPermisoAlbum;
-    @JoinColumn(name = "ID_PRIVACIDAD", referencedColumnName = "ID_PRIVACIDAD")
+    private PermisoAlbum permisoAlbumidpermisoalbum;
+    @JoinColumn(name = "Privacidad_id_privacidad", referencedColumnName = "id_privacidad")
     @ManyToOne(optional = false)
-    private Privacidad idPrivacidad;
+    private Privacidad privacidadidprivacidad;
+    @JoinColumn(name = "Usuario_id_user", referencedColumnName = "id_user")
+    @ManyToOne(optional = false)
+    private Usuario usuarioiduser;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
+    private Collection<FavoritoAlbum> favoritoAlbumCollection;
 
     public Album() {
     }
@@ -112,12 +107,12 @@ public class Album implements Serializable {
         this.nombreAlbum = nombreAlbum;
     }
 
-    public Date getFechacreacionAlbum() {
-        return fechacreacionAlbum;
+    public Date getFechaCreacionAlbum() {
+        return fechaCreacionAlbum;
     }
 
-    public void setFechacreacionAlbum(Date fechacreacionAlbum) {
-        this.fechacreacionAlbum = fechacreacionAlbum;
+    public void setFechaCreacionAlbum(Date fechaCreacionAlbum) {
+        this.fechaCreacionAlbum = fechaCreacionAlbum;
     }
 
     public String getDescripcionAlbum() {
@@ -152,29 +147,12 @@ public class Album implements Serializable {
         this.cantidadFavoritos = cantidadFavoritos;
     }
 
-    public Integer getCantidadComentarios() {
-        return cantidadComentarios;
-    }
-
-    public void setCantidadComentarios(Integer cantidadComentarios) {
-        this.cantidadComentarios = cantidadComentarios;
-    }
-
     public Date getUltimaActualizacionAlbum() {
         return ultimaActualizacionAlbum;
     }
 
     public void setUltimaActualizacionAlbum(Date ultimaActualizacionAlbum) {
         this.ultimaActualizacionAlbum = ultimaActualizacionAlbum;
-    }
-
-    @XmlTransient
-    public Collection<FavoritoAlbum> getFavoritoAlbumCollection() {
-        return favoritoAlbumCollection;
-    }
-
-    public void setFavoritoAlbumCollection(Collection<FavoritoAlbum> favoritoAlbumCollection) {
-        this.favoritoAlbumCollection = favoritoAlbumCollection;
     }
 
     @XmlTransient
@@ -186,37 +164,37 @@ public class Album implements Serializable {
         this.albumFotografiaCollection = albumFotografiaCollection;
     }
 
+    public PermisoAlbum getPermisoAlbumidpermisoalbum() {
+        return permisoAlbumidpermisoalbum;
+    }
+
+    public void setPermisoAlbumidpermisoalbum(PermisoAlbum permisoAlbumidpermisoalbum) {
+        this.permisoAlbumidpermisoalbum = permisoAlbumidpermisoalbum;
+    }
+
+    public Privacidad getPrivacidadidprivacidad() {
+        return privacidadidprivacidad;
+    }
+
+    public void setPrivacidadidprivacidad(Privacidad privacidadidprivacidad) {
+        this.privacidadidprivacidad = privacidadidprivacidad;
+    }
+
+    public Usuario getUsuarioiduser() {
+        return usuarioiduser;
+    }
+
+    public void setUsuarioiduser(Usuario usuarioiduser) {
+        this.usuarioiduser = usuarioiduser;
+    }
+
     @XmlTransient
-    public Collection<ComentarioAlbum> getComentarioAlbumCollection() {
-        return comentarioAlbumCollection;
+    public Collection<FavoritoAlbum> getFavoritoAlbumCollection() {
+        return favoritoAlbumCollection;
     }
 
-    public void setComentarioAlbumCollection(Collection<ComentarioAlbum> comentarioAlbumCollection) {
-        this.comentarioAlbumCollection = comentarioAlbumCollection;
-    }
-
-    public Usuario getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(Usuario idUser) {
-        this.idUser = idUser;
-    }
-
-    public PermisoAlbum getIdPermisoAlbum() {
-        return idPermisoAlbum;
-    }
-
-    public void setIdPermisoAlbum(PermisoAlbum idPermisoAlbum) {
-        this.idPermisoAlbum = idPermisoAlbum;
-    }
-
-    public Privacidad getIdPrivacidad() {
-        return idPrivacidad;
-    }
-
-    public void setIdPrivacidad(Privacidad idPrivacidad) {
-        this.idPrivacidad = idPrivacidad;
+    public void setFavoritoAlbumCollection(Collection<FavoritoAlbum> favoritoAlbumCollection) {
+        this.favoritoAlbumCollection = favoritoAlbumCollection;
     }
 
     @Override

@@ -13,48 +13,48 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Embeddable
 public class FavoritoFotografiaPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID_USER")
-    private int idUser;
+    @Column(name = "Usuario_id_user")
+    private int usuarioiduser;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID_PHOTO")
-    private int idPhoto;
+    @Column(name = "Fotografia_id_photo")
+    private int fotografiaidphoto;
 
     public FavoritoFotografiaPK() {
     }
 
-    public FavoritoFotografiaPK(int idUser, int idPhoto) {
-        this.idUser = idUser;
-        this.idPhoto = idPhoto;
+    public FavoritoFotografiaPK(int usuarioiduser, int fotografiaidphoto) {
+        this.usuarioiduser = usuarioiduser;
+        this.fotografiaidphoto = fotografiaidphoto;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public int getUsuarioiduser() {
+        return usuarioiduser;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUsuarioiduser(int usuarioiduser) {
+        this.usuarioiduser = usuarioiduser;
     }
 
-    public int getIdPhoto() {
-        return idPhoto;
+    public int getFotografiaidphoto() {
+        return fotografiaidphoto;
     }
 
-    public void setIdPhoto(int idPhoto) {
-        this.idPhoto = idPhoto;
+    public void setFotografiaidphoto(int fotografiaidphoto) {
+        this.fotografiaidphoto = fotografiaidphoto;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) idUser;
-        hash += (int) idPhoto;
+        hash += (int) usuarioiduser;
+        hash += (int) fotografiaidphoto;
         return hash;
     }
 
@@ -65,10 +65,10 @@ public class FavoritoFotografiaPK implements Serializable {
             return false;
         }
         FavoritoFotografiaPK other = (FavoritoFotografiaPK) object;
-        if (this.idUser != other.idUser) {
+        if (this.usuarioiduser != other.usuarioiduser) {
             return false;
         }
-        if (this.idPhoto != other.idPhoto) {
+        if (this.fotografiaidphoto != other.fotografiaidphoto) {
             return false;
         }
         return true;
@@ -76,7 +76,7 @@ public class FavoritoFotografiaPK implements Serializable {
 
     @Override
     public String toString() {
-        return "model.FavoritoFotografiaPK[ idUser=" + idUser + ", idPhoto=" + idPhoto + " ]";
+        return "model.FavoritoFotografiaPK[ usuarioiduser=" + usuarioiduser + ", fotografiaidphoto=" + fotografiaidphoto + " ]";
     }
     
 }

@@ -5,18 +5,15 @@
  */
 package facade;
 
-/**
- *
- * @author ian
- */
-
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import model.TipoClasificacion;
 
+/**
+ *
+ * @author sebastian
+ */
 @Stateless
 public class TipoClasificacionEJBFacade extends AbstractFacade<TipoClasificacion>{
 
@@ -26,12 +23,8 @@ public class TipoClasificacionEJBFacade extends AbstractFacade<TipoClasificacion
         super(TipoClasificacion.class);
     }
     
-    
-    
-
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-    
 }

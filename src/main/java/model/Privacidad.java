@@ -11,22 +11,23 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Entity
-@Table(name = "PRIVACIDAD")
+@Table(name = "Privacidad")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Privacidad.findAll", query = "SELECT p FROM Privacidad p"),
@@ -35,17 +36,17 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Privacidad implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID_PRIVACIDAD")
+    @Column(name = "id_privacidad")
     private Integer idPrivacidad;
-    @Size(max = 20)
-    @Column(name = "TIPO_PRIVACIDAD")
+    @Size(max = 45)
+    @Column(name = "tipo_privacidad")
     private String tipoPrivacidad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPrivacidad")
-    private Collection<Fotografia> fotografiaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPrivacidad")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "privacidadidprivacidad")
     private Collection<Album> albumCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "privacidadidprivacidad")
+    private Collection<Fotografia> fotografiaCollection;
 
     public Privacidad() {
     }
@@ -71,21 +72,21 @@ public class Privacidad implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Fotografia> getFotografiaCollection() {
-        return fotografiaCollection;
-    }
-
-    public void setFotografiaCollection(Collection<Fotografia> fotografiaCollection) {
-        this.fotografiaCollection = fotografiaCollection;
-    }
-
-    @XmlTransient
     public Collection<Album> getAlbumCollection() {
         return albumCollection;
     }
 
     public void setAlbumCollection(Collection<Album> albumCollection) {
         this.albumCollection = albumCollection;
+    }
+
+    @XmlTransient
+    public Collection<Fotografia> getFotografiaCollection() {
+        return fotografiaCollection;
+    }
+
+    public void setFotografiaCollection(Collection<Fotografia> fotografiaCollection) {
+        this.fotografiaCollection = fotografiaCollection;
     }
 
     @Override

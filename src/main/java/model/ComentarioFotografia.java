@@ -25,10 +25,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Entity
-@Table(name = "COMENTARIO_FOTOGRAFIA")
+@Table(name = "Comentario_Fotografia")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ComentarioFotografia.findAll", query = "SELECT c FROM ComentarioFotografia c"),
@@ -40,23 +40,23 @@ public class ComentarioFotografia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_COMENTARIO_PHOTO")
+    @Column(name = "id_comentario_photo")
     private Integer idComentarioPhoto;
     @Size(max = 150)
-    @Column(name = "DESCRIPCION_COMENTARIO")
+    @Column(name = "descripcion_comentario")
     private String descripcionComentario;
-    @Column(name = "FECHA_PUBLICACION_COMENTARIO")
+    @Column(name = "fecha_publicacion_comentario")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaPublicacionComentario;
-    @JoinColumn(name = "ID_TIPO_CLASIFICACION", referencedColumnName = "ID_TIPO_CLASIFICACION")
-    @ManyToOne
-    private TipoClasificacion idTipoClasificacion;
-    @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER")
+    @JoinColumn(name = "Fotografia_id_photo", referencedColumnName = "id_photo")
     @ManyToOne(optional = false)
-    private Usuario idUser;
-    @JoinColumn(name = "ID_PHOTO", referencedColumnName = "ID_PHOTO")
+    private Fotografia fotografiaidphoto;
+    @JoinColumn(name = "Tipo_Clasificacion_id_tipo_clasificacion", referencedColumnName = "id_tipo_clasificacion")
     @ManyToOne(optional = false)
-    private Fotografia idPhoto;
+    private TipoClasificacion tipoClasificacionidtipoclasificacion;
+    @JoinColumn(name = "Usuario_id_user", referencedColumnName = "id_user")
+    @ManyToOne(optional = false)
+    private Usuario usuarioiduser;
 
     public ComentarioFotografia() {
     }
@@ -89,28 +89,28 @@ public class ComentarioFotografia implements Serializable {
         this.fechaPublicacionComentario = fechaPublicacionComentario;
     }
 
-    public TipoClasificacion getIdTipoClasificacion() {
-        return idTipoClasificacion;
+    public Fotografia getFotografiaidphoto() {
+        return fotografiaidphoto;
     }
 
-    public void setIdTipoClasificacion(TipoClasificacion idTipoClasificacion) {
-        this.idTipoClasificacion = idTipoClasificacion;
+    public void setFotografiaidphoto(Fotografia fotografiaidphoto) {
+        this.fotografiaidphoto = fotografiaidphoto;
     }
 
-    public Usuario getIdUser() {
-        return idUser;
+    public TipoClasificacion getTipoClasificacionidtipoclasificacion() {
+        return tipoClasificacionidtipoclasificacion;
     }
 
-    public void setIdUser(Usuario idUser) {
-        this.idUser = idUser;
+    public void setTipoClasificacionidtipoclasificacion(TipoClasificacion tipoClasificacionidtipoclasificacion) {
+        this.tipoClasificacionidtipoclasificacion = tipoClasificacionidtipoclasificacion;
     }
 
-    public Fotografia getIdPhoto() {
-        return idPhoto;
+    public Usuario getUsuarioiduser() {
+        return usuarioiduser;
     }
 
-    public void setIdPhoto(Fotografia idPhoto) {
-        this.idPhoto = idPhoto;
+    public void setUsuarioiduser(Usuario usuarioiduser) {
+        this.usuarioiduser = usuarioiduser;
     }
 
     @Override

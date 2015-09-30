@@ -15,8 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -30,10 +28,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "Usuario")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
@@ -46,88 +44,77 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findByApellidoUser", query = "SELECT u FROM Usuario u WHERE u.apellidoUser = :apellidoUser"),
     @NamedQuery(name = "Usuario.findBySexoUser", query = "SELECT u FROM Usuario u WHERE u.sexoUser = :sexoUser"),
     @NamedQuery(name = "Usuario.findByDireccionFotoPortadaUser", query = "SELECT u FROM Usuario u WHERE u.direccionFotoPortadaUser = :direccionFotoPortadaUser"),
-    @NamedQuery(name = "Usuario.findByFechaCumpleanosUser", query = "SELECT u FROM Usuario u WHERE u.fechaCumpleanosUser = :fechaCumpleanosUser"),
+    @NamedQuery(name = "Usuario.findByFechaCumplea\u00f1osUser", query = "SELECT u FROM Usuario u WHERE u.fechaCumplea\u00f1osUser = :fechaCumplea\u00f1osUser"),
     @NamedQuery(name = "Usuario.findByEmailUser", query = "SELECT u FROM Usuario u WHERE u.emailUser = :emailUser"),
     @NamedQuery(name = "Usuario.findByFechaUltimaActualizacion", query = "SELECT u FROM Usuario u WHERE u.fechaUltimaActualizacion = :fechaUltimaActualizacion"),
     @NamedQuery(name = "Usuario.findByCantidadFotografiasSubidas", query = "SELECT u FROM Usuario u WHERE u.cantidadFotografiasSubidas = :cantidadFotografiasSubidas"),
     @NamedQuery(name = "Usuario.findByCantidadAlbumesCreados", query = "SELECT u FROM Usuario u WHERE u.cantidadAlbumesCreados = :cantidadAlbumesCreados"),
     @NamedQuery(name = "Usuario.findByCantidadSeguidores", query = "SELECT u FROM Usuario u WHERE u.cantidadSeguidores = :cantidadSeguidores"),
-    @NamedQuery(name = "Usuario.findByCantidadSeguidos", query = "SELECT u FROM Usuario u WHERE u.cantidadSeguidos = :cantidadSeguidos"),
-    @NamedQuery(name = "Usuario.findByUbicacionUser", query = "SELECT u FROM Usuario u WHERE u.ubicacionUser = :ubicacionUser")})
+    @NamedQuery(name = "Usuario.findByCantidadSeguidos", query = "SELECT u FROM Usuario u WHERE u.cantidadSeguidos = :cantidadSeguidos")})
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_USER")
+    @Column(name = "id_user")
     private Integer idUser;
-    @Size(max = 20)
-    @Column(name = "PASS_USER")
+    @Size(max = 45)
+    @Column(name = "pass_user")
     private String passUser;
-    @Column(name = "FECHA_CREACION_CUENTA")
+    @Column(name = "fecha_creacion_cuenta")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacionCuenta;
-    @Size(max = 20)
-    @Column(name = "ALIAS_USER")
+    @Size(max = 45)
+    @Column(name = "alias_user")
     private String aliasUser;
-    @Size(max = 20)
-    @Column(name = "NOMBRE_REAL_USER")
+    @Size(max = 45)
+    @Column(name = "nombre_real_user")
     private String nombreRealUser;
     @Size(max = 50)
-    @Column(name = "DIRECCION_FOTO_PERFIL_USER")
+    @Column(name = "direccion_foto_perfil_user")
     private String direccionFotoPerfilUser;
-    @Size(max = 20)
-    @Column(name = "APELLIDO_USER")
+    @Size(max = 45)
+    @Column(name = "apellido_user")
     private String apellidoUser;
-    @Size(max = 8)
-    @Column(name = "SEXO_USER")
+    @Size(max = 10)
+    @Column(name = "sexo_user")
     private String sexoUser;
-    @Size(max = 50)
-    @Column(name = "DIRECCION_FOTO_PORTADA_USER")
+    @Size(max = 45)
+    @Column(name = "direccion_foto_portada_user")
     private String direccionFotoPortadaUser;
-    @Column(name = "FECHA_CUMPLEANOS_USER")
-    @Temporal(TemporalType.DATE)
-    private Date fechaCumpleanosUser;
-    @Size(max = 30)
-    @Column(name = "EMAIL_USER")
+    @Column(name = "fecha_cumplea\u00f1os_user")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaCumpleañosUser;
+    @Size(max = 45)
+    @Column(name = "email_user")
     private String emailUser;
-    @Column(name = "FECHA_ULTIMA_ACTUALIZACION")
+    @Column(name = "fecha_ultima_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaUltimaActualizacion;
-    @Column(name = "CANTIDAD_FOTOGRAFIAS_SUBIDAS")
+    @Column(name = "cantidad_fotografias_subidas")
     private Integer cantidadFotografiasSubidas;
-    @Column(name = "CANTIDAD_ALBUMES_CREADOS")
+    @Column(name = "cantidad_albumes_creados")
     private Integer cantidadAlbumesCreados;
-    @Column(name = "CANTIDAD_SEGUIDORES")
+    @Column(name = "cantidad_seguidores")
     private Integer cantidadSeguidores;
-    @Column(name = "CANTIDAD_SEGUIDOS")
+    @Column(name = "cantidad_seguidos")
     private Integer cantidadSeguidos;
-    @Size(max = 255)
-    @Column(name = "UBICACION_USER")
-    private String ubicacionUser;
-    @JoinTable(name = "ETIQUETA_USUARIO", joinColumns = {
-        @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER")}, inverseJoinColumns = {
-        @JoinColumn(name = "ID_PHOTO", referencedColumnName = "ID_PHOTO")})
-    @ManyToMany
+    @ManyToMany(mappedBy = "usuarioCollection")
     private Collection<Fotografia> fotografiaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<Fotografia> fotografiaCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Collection<FavoritoAlbum> favoritoAlbumCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<ComentarioFotografia> comentarioFotografiaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<ComentarioAlbum> comentarioAlbumCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Collection<FavoritoFotografia> favoritoFotografiaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<Album> albumCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Collection<Seguidor> seguidorCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario1")
     private Collection<Seguidor> seguidorCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<Tag> tagCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioiduser")
+    private Collection<ComentarioFotografia> comentarioFotografiaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioiduser")
+    private Collection<Album> albumCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private Collection<FavoritoFotografia> favoritoFotografiaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private Collection<FavoritoAlbum> favoritoAlbumCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioiduser")
+    private Collection<Fotografia> fotografiaCollection1;
 
     public Usuario() {
     }
@@ -208,12 +195,12 @@ public class Usuario implements Serializable {
         this.direccionFotoPortadaUser = direccionFotoPortadaUser;
     }
 
-    public Date getFechaCumpleanosUser() {
-        return fechaCumpleanosUser;
+    public Date getFechaCumpleañosUser() {
+        return fechaCumpleañosUser;
     }
 
-    public void setFechaCumpleanosUser(Date fechaCumpleanosUser) {
-        this.fechaCumpleanosUser = fechaCumpleanosUser;
+    public void setFechaCumpleañosUser(Date fechaCumpleañosUser) {
+        this.fechaCumpleañosUser = fechaCumpleañosUser;
     }
 
     public String getEmailUser() {
@@ -264,14 +251,6 @@ public class Usuario implements Serializable {
         this.cantidadSeguidos = cantidadSeguidos;
     }
 
-    public String getUbicacionUser() {
-        return ubicacionUser;
-    }
-
-    public void setUbicacionUser(String ubicacionUser) {
-        this.ubicacionUser = ubicacionUser;
-    }
-
     @XmlTransient
     public Collection<Fotografia> getFotografiaCollection() {
         return fotografiaCollection;
@@ -279,60 +258,6 @@ public class Usuario implements Serializable {
 
     public void setFotografiaCollection(Collection<Fotografia> fotografiaCollection) {
         this.fotografiaCollection = fotografiaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Fotografia> getFotografiaCollection1() {
-        return fotografiaCollection1;
-    }
-
-    public void setFotografiaCollection1(Collection<Fotografia> fotografiaCollection1) {
-        this.fotografiaCollection1 = fotografiaCollection1;
-    }
-
-    @XmlTransient
-    public Collection<FavoritoAlbum> getFavoritoAlbumCollection() {
-        return favoritoAlbumCollection;
-    }
-
-    public void setFavoritoAlbumCollection(Collection<FavoritoAlbum> favoritoAlbumCollection) {
-        this.favoritoAlbumCollection = favoritoAlbumCollection;
-    }
-
-    @XmlTransient
-    public Collection<ComentarioFotografia> getComentarioFotografiaCollection() {
-        return comentarioFotografiaCollection;
-    }
-
-    public void setComentarioFotografiaCollection(Collection<ComentarioFotografia> comentarioFotografiaCollection) {
-        this.comentarioFotografiaCollection = comentarioFotografiaCollection;
-    }
-
-    @XmlTransient
-    public Collection<ComentarioAlbum> getComentarioAlbumCollection() {
-        return comentarioAlbumCollection;
-    }
-
-    public void setComentarioAlbumCollection(Collection<ComentarioAlbum> comentarioAlbumCollection) {
-        this.comentarioAlbumCollection = comentarioAlbumCollection;
-    }
-
-    @XmlTransient
-    public Collection<FavoritoFotografia> getFavoritoFotografiaCollection() {
-        return favoritoFotografiaCollection;
-    }
-
-    public void setFavoritoFotografiaCollection(Collection<FavoritoFotografia> favoritoFotografiaCollection) {
-        this.favoritoFotografiaCollection = favoritoFotografiaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Album> getAlbumCollection() {
-        return albumCollection;
-    }
-
-    public void setAlbumCollection(Collection<Album> albumCollection) {
-        this.albumCollection = albumCollection;
     }
 
     @XmlTransient
@@ -354,12 +279,48 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Tag> getTagCollection() {
-        return tagCollection;
+    public Collection<ComentarioFotografia> getComentarioFotografiaCollection() {
+        return comentarioFotografiaCollection;
     }
 
-    public void setTagCollection(Collection<Tag> tagCollection) {
-        this.tagCollection = tagCollection;
+    public void setComentarioFotografiaCollection(Collection<ComentarioFotografia> comentarioFotografiaCollection) {
+        this.comentarioFotografiaCollection = comentarioFotografiaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Album> getAlbumCollection() {
+        return albumCollection;
+    }
+
+    public void setAlbumCollection(Collection<Album> albumCollection) {
+        this.albumCollection = albumCollection;
+    }
+
+    @XmlTransient
+    public Collection<FavoritoFotografia> getFavoritoFotografiaCollection() {
+        return favoritoFotografiaCollection;
+    }
+
+    public void setFavoritoFotografiaCollection(Collection<FavoritoFotografia> favoritoFotografiaCollection) {
+        this.favoritoFotografiaCollection = favoritoFotografiaCollection;
+    }
+
+    @XmlTransient
+    public Collection<FavoritoAlbum> getFavoritoAlbumCollection() {
+        return favoritoAlbumCollection;
+    }
+
+    public void setFavoritoAlbumCollection(Collection<FavoritoAlbum> favoritoAlbumCollection) {
+        this.favoritoAlbumCollection = favoritoAlbumCollection;
+    }
+
+    @XmlTransient
+    public Collection<Fotografia> getFotografiaCollection1() {
+        return fotografiaCollection1;
+    }
+
+    public void setFotografiaCollection1(Collection<Fotografia> fotografiaCollection1) {
+        this.fotografiaCollection1 = fotografiaCollection1;
     }
 
     @Override

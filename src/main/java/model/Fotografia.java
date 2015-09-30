@@ -31,10 +31,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Entity
-@Table(name = "FOTOGRAFIA")
+@Table(name = "Fotografia")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Fotografia.findAll", query = "SELECT f FROM Fotografia f"),
@@ -48,86 +48,91 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Fotografia.findByFormatoPhoto", query = "SELECT f FROM Fotografia f WHERE f.formatoPhoto = :formatoPhoto"),
     @NamedQuery(name = "Fotografia.findByDireccionFisicaPhoto", query = "SELECT f FROM Fotografia f WHERE f.direccionFisicaPhoto = :direccionFisicaPhoto"),
     @NamedQuery(name = "Fotografia.findByUltimaActualizacionPhoto", query = "SELECT f FROM Fotografia f WHERE f.ultimaActualizacionPhoto = :ultimaActualizacionPhoto"),
-    @NamedQuery(name = "Fotografia.findByCantidadCompartidos", query = "SELECT f FROM Fotografia f WHERE f.cantidadCompartidos = :cantidadCompartidos"),
-    @NamedQuery(name = "Fotografia.findByCantidadDescargadas", query = "SELECT f FROM Fotografia f WHERE f.cantidadDescargadas = :cantidadDescargadas"),
+    @NamedQuery(name = "Fotografia.findByCantidadDescargas", query = "SELECT f FROM Fotografia f WHERE f.cantidadDescargas = :cantidadDescargas"),
+    @NamedQuery(name = "Fotografia.findByCantidadComentarios", query = "SELECT f FROM Fotografia f WHERE f.cantidadComentarios = :cantidadComentarios"),
     @NamedQuery(name = "Fotografia.findByCantidadComentariosPositivos", query = "SELECT f FROM Fotografia f WHERE f.cantidadComentariosPositivos = :cantidadComentariosPositivos"),
     @NamedQuery(name = "Fotografia.findByCantidadComentariosNegativos", query = "SELECT f FROM Fotografia f WHERE f.cantidadComentariosNegativos = :cantidadComentariosNegativos"),
-    @NamedQuery(name = "Fotografia.findByCantidadComentariosNeutros", query = "SELECT f FROM Fotografia f WHERE f.cantidadComentariosNeutros = :cantidadComentariosNeutros")})
+    @NamedQuery(name = "Fotografia.findByCantidadComentariosNeutros", query = "SELECT f FROM Fotografia f WHERE f.cantidadComentariosNeutros = :cantidadComentariosNeutros"),
+    @NamedQuery(name = "Fotografia.findByPunto", query = "SELECT f FROM Fotografia f WHERE f.punto = :punto")})
 public class Fotografia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_PHOTO")
+    @Column(name = "id_photo")
     private Integer idPhoto;
-    @Column(name = "FECHA_SUBIDA_PHOTO")
+    @Column(name = "fecha_subida_photo")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaSubidaPhoto;
-    @Column(name = "FECHA_TOMADA_PHOTO")
+    @Column(name = "fecha_tomada_photo")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaTomadaPhoto;
-    @Column(name = "CANTIDAD_VISITAS_PHOTO")
+    @Column(name = "cantidad_visitas_photo")
     private Integer cantidadVisitasPhoto;
-    @Size(max = 20)
-    @Column(name = "TITULO_PHOTO")
+    @Size(max = 45)
+    @Column(name = "titulo_photo")
     private String tituloPhoto;
-    @Size(max = 50)
-    @Column(name = "DESCRIPCION_PHOTO")
+    @Size(max = 45)
+    @Column(name = "descripcion_photo")
     private String descripcionPhoto;
-    @Column(name = "CANTIDAD_FAVORITOS_PHOTO")
+    @Column(name = "cantidad_favoritos_photo")
     private Integer cantidadFavoritosPhoto;
-    @Size(max = 20)
-    @Column(name = "FORMATO_PHOTO")
+    @Size(max = 45)
+    @Column(name = "formato_photo")
     private String formatoPhoto;
-    @Size(max = 50)
-    @Column(name = "DIRECCION_FISICA_PHOTO")
+    @Size(max = 45)
+    @Column(name = "direccion_fisica_photo")
     private String direccionFisicaPhoto;
-    @Column(name = "ULTIMA_ACTUALIZACION_PHOTO")
+    @Column(name = "ultima_actualizacion_photo")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ultimaActualizacionPhoto;
-    @Column(name = "CANTIDAD_COMPARTIDOS")
-    private Integer cantidadCompartidos;
-    @Column(name = "CANTIDAD_DESCARGADAS")
-    private Integer cantidadDescargadas;
-    @Column(name = "CANTIDAD_COMENTARIOS_POSITIVOS")
+    @Column(name = "cantidad_descargas")
+    private Integer cantidadDescargas;
+    @Column(name = "cantidad_comentarios")
+    private Integer cantidadComentarios;
+    @Column(name = "cantidad_comentarios_positivos")
     private Integer cantidadComentariosPositivos;
-    @Column(name = "CANTIDAD_COMENTARIOS_NEGATIVOS")
+    @Column(name = "cantidad_comentarios_negativos")
     private Integer cantidadComentariosNegativos;
-    @Column(name = "CANTIDAD_COMENTARIOS_NEUTROS")
+    @Column(name = "cantidad_comentarios_neutros")
     private Integer cantidadComentariosNeutros;
-    @JoinTable(name = "FOTOGRAFIA_TAG", joinColumns = {
-        @JoinColumn(name = "ID_PHOTO", referencedColumnName = "ID_PHOTO")}, inverseJoinColumns = {
-        @JoinColumn(name = "ID_TAG", referencedColumnName = "ID_TAG")})
+    @Size(max = 50)
+    @Column(name = "punto")
+    private String punto;
+    @JoinTable(name = "Fotografia_Tag", joinColumns = {
+        @JoinColumn(name = "Fotografia_id_photo", referencedColumnName = "id_photo")}, inverseJoinColumns = {
+        @JoinColumn(name = "Tag_id_tag", referencedColumnName = "id_tag")})
     @ManyToMany
     private Collection<Tag> tagCollection;
-    @ManyToMany(mappedBy = "fotografiaCollection")
+    @JoinTable(name = "Etiqueta_Usuario", joinColumns = {
+        @JoinColumn(name = "Fotografia_id_photo", referencedColumnName = "id_photo")}, inverseJoinColumns = {
+        @JoinColumn(name = "Usuario_id_user", referencedColumnName = "id_user")})
+    @ManyToMany
     private Collection<Usuario> usuarioCollection;
-    @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER")
-    @ManyToOne(optional = false)
-    private Usuario idUser;
-    @JoinColumn(name = "ID_CAMARA", referencedColumnName = "ID_CAMARA")
-    @ManyToOne(optional = false)
-    private Camara idCamara;
-    @JoinColumn(name = "ID_LOCALIZACION", referencedColumnName = "ID_LOCALIZACION")
-    @ManyToOne
-    private Localizacion idLocalizacion;
-    @JoinColumn(name = "ID_PRIVACIDAD", referencedColumnName = "ID_PRIVACIDAD")
-    @ManyToOne(optional = false)
-    private Privacidad idPrivacidad;
-    @JoinColumn(name = "ID_PERMISO_FOTOGRAFIA", referencedColumnName = "ID_PERMISO_FOTOGRAFIA")
-    @ManyToOne
-    private PermisoFotografia idPermisoFotografia;
-    @JoinColumn(name = "ID_TIPO_CLASIFICACION", referencedColumnName = "ID_TIPO_CLASIFICACION")
-    @ManyToOne
-    private TipoClasificacion idTipoClasificacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fotografia")
     private Collection<AlbumFotografia> albumFotografiaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPhoto")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fotografiaidphoto")
     private Collection<ComentarioFotografia> comentarioFotografiaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fotografia")
-    private Collection<Exif> exifCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fotografia")
     private Collection<FavoritoFotografia> favoritoFotografiaCollection;
+    @JoinColumn(name = "Camara_id_camara", referencedColumnName = "id_camara")
+    @ManyToOne(optional = false)
+    private Camara camaraidcamara;
+    @JoinColumn(name = "Exif_id_exif", referencedColumnName = "id_exif")
+    @ManyToOne(optional = false)
+    private Exif exifidexif;
+    @JoinColumn(name = "Permiso_Fotografia_id_permiso_fotografia", referencedColumnName = "id_permiso_fotografia")
+    @ManyToOne(optional = false)
+    private PermisoFotografia permisoFotografiaidpermisofotografia;
+    @JoinColumn(name = "Privacidad_id_privacidad", referencedColumnName = "id_privacidad")
+    @ManyToOne(optional = false)
+    private Privacidad privacidadidprivacidad;
+    @JoinColumn(name = "Tipo_Clasificacion_id_tipo_clasificacion", referencedColumnName = "id_tipo_clasificacion")
+    @ManyToOne(optional = false)
+    private TipoClasificacion tipoClasificacionidtipoclasificacion;
+    @JoinColumn(name = "Usuario_id_user", referencedColumnName = "id_user")
+    @ManyToOne(optional = false)
+    private Usuario usuarioiduser;
 
     public Fotografia() {
     }
@@ -216,20 +221,20 @@ public class Fotografia implements Serializable {
         this.ultimaActualizacionPhoto = ultimaActualizacionPhoto;
     }
 
-    public Integer getCantidadCompartidos() {
-        return cantidadCompartidos;
+    public Integer getCantidadDescargas() {
+        return cantidadDescargas;
     }
 
-    public void setCantidadCompartidos(Integer cantidadCompartidos) {
-        this.cantidadCompartidos = cantidadCompartidos;
+    public void setCantidadDescargas(Integer cantidadDescargas) {
+        this.cantidadDescargas = cantidadDescargas;
     }
 
-    public Integer getCantidadDescargadas() {
-        return cantidadDescargadas;
+    public Integer getCantidadComentarios() {
+        return cantidadComentarios;
     }
 
-    public void setCantidadDescargadas(Integer cantidadDescargadas) {
-        this.cantidadDescargadas = cantidadDescargadas;
+    public void setCantidadComentarios(Integer cantidadComentarios) {
+        this.cantidadComentarios = cantidadComentarios;
     }
 
     public Integer getCantidadComentariosPositivos() {
@@ -256,6 +261,14 @@ public class Fotografia implements Serializable {
         this.cantidadComentariosNeutros = cantidadComentariosNeutros;
     }
 
+    public String getPunto() {
+        return punto;
+    }
+
+    public void setPunto(String punto) {
+        this.punto = punto;
+    }
+
     @XmlTransient
     public Collection<Tag> getTagCollection() {
         return tagCollection;
@@ -272,54 +285,6 @@ public class Fotografia implements Serializable {
 
     public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
         this.usuarioCollection = usuarioCollection;
-    }
-
-    public Usuario getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(Usuario idUser) {
-        this.idUser = idUser;
-    }
-
-    public Camara getIdCamara() {
-        return idCamara;
-    }
-
-    public void setIdCamara(Camara idCamara) {
-        this.idCamara = idCamara;
-    }
-
-    public Localizacion getIdLocalizacion() {
-        return idLocalizacion;
-    }
-
-    public void setIdLocalizacion(Localizacion idLocalizacion) {
-        this.idLocalizacion = idLocalizacion;
-    }
-
-    public Privacidad getIdPrivacidad() {
-        return idPrivacidad;
-    }
-
-    public void setIdPrivacidad(Privacidad idPrivacidad) {
-        this.idPrivacidad = idPrivacidad;
-    }
-
-    public PermisoFotografia getIdPermisoFotografia() {
-        return idPermisoFotografia;
-    }
-
-    public void setIdPermisoFotografia(PermisoFotografia idPermisoFotografia) {
-        this.idPermisoFotografia = idPermisoFotografia;
-    }
-
-    public TipoClasificacion getIdTipoClasificacion() {
-        return idTipoClasificacion;
-    }
-
-    public void setIdTipoClasificacion(TipoClasificacion idTipoClasificacion) {
-        this.idTipoClasificacion = idTipoClasificacion;
     }
 
     @XmlTransient
@@ -341,21 +306,60 @@ public class Fotografia implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Exif> getExifCollection() {
-        return exifCollection;
-    }
-
-    public void setExifCollection(Collection<Exif> exifCollection) {
-        this.exifCollection = exifCollection;
-    }
-
-    @XmlTransient
     public Collection<FavoritoFotografia> getFavoritoFotografiaCollection() {
         return favoritoFotografiaCollection;
     }
 
     public void setFavoritoFotografiaCollection(Collection<FavoritoFotografia> favoritoFotografiaCollection) {
         this.favoritoFotografiaCollection = favoritoFotografiaCollection;
+    }
+
+    public Camara getCamaraidcamara() {
+        return camaraidcamara;
+    }
+
+    public void setCamaraidcamara(Camara camaraidcamara) {
+        this.camaraidcamara = camaraidcamara;
+    }
+
+    public Exif getExifidexif() {
+        return exifidexif;
+    }
+
+    public void setExifidexif(Exif exifidexif) {
+        this.exifidexif = exifidexif;
+    }
+
+    public PermisoFotografia getPermisoFotografiaidpermisofotografia() {
+        return permisoFotografiaidpermisofotografia;
+    }
+
+    public void setPermisoFotografiaidpermisofotografia(PermisoFotografia permisoFotografiaidpermisofotografia) {
+        this.permisoFotografiaidpermisofotografia = permisoFotografiaidpermisofotografia;
+    }
+
+    public Privacidad getPrivacidadidprivacidad() {
+        return privacidadidprivacidad;
+    }
+
+    public void setPrivacidadidprivacidad(Privacidad privacidadidprivacidad) {
+        this.privacidadidprivacidad = privacidadidprivacidad;
+    }
+
+    public TipoClasificacion getTipoClasificacionidtipoclasificacion() {
+        return tipoClasificacionidtipoclasificacion;
+    }
+
+    public void setTipoClasificacionidtipoclasificacion(TipoClasificacion tipoClasificacionidtipoclasificacion) {
+        this.tipoClasificacionidtipoclasificacion = tipoClasificacionidtipoclasificacion;
+    }
+
+    public Usuario getUsuarioiduser() {
+        return usuarioiduser;
+    }
+
+    public void setUsuarioiduser(Usuario usuarioiduser) {
+        this.usuarioiduser = usuarioiduser;
     }
 
     @Override

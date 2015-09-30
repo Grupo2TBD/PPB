@@ -8,44 +8,46 @@ package model;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Entity
-@Table(name = "PERMISO_FOTOGRAFIA")
+@Table(name = "Permiso_Fotografia")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "PermisoFotografia.findAll", query = "SELECT p FROM PermisoFotografia p"),
     @NamedQuery(name = "PermisoFotografia.findByIdPermisoFotografia", query = "SELECT p FROM PermisoFotografia p WHERE p.idPermisoFotografia = :idPermisoFotografia"),
-    @NamedQuery(name = "PermisoFotografia.findByCansharephoto", query = "SELECT p FROM PermisoFotografia p WHERE p.cansharephoto = :cansharephoto"),
     @NamedQuery(name = "PermisoFotografia.findByCancommentphoto", query = "SELECT p FROM PermisoFotografia p WHERE p.cancommentphoto = :cancommentphoto"),
-    @NamedQuery(name = "PermisoFotografia.findByCandownloadphoto", query = "SELECT p FROM PermisoFotografia p WHERE p.candownloadphoto = :candownloadphoto")})
+    @NamedQuery(name = "PermisoFotografia.findByCandownloadphoto", query = "SELECT p FROM PermisoFotografia p WHERE p.candownloadphoto = :candownloadphoto"),
+    @NamedQuery(name = "PermisoFotografia.findByCanfavoritephoto", query = "SELECT p FROM PermisoFotografia p WHERE p.canfavoritephoto = :canfavoritephoto")})
 public class PermisoFotografia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID_PERMISO_FOTOGRAFIA")
+    @Column(name = "id_permiso_fotografia")
     private Integer idPermisoFotografia;
-    @Column(name = "CANSHAREPHOTO")
-    private Boolean cansharephoto;
-    @Column(name = "CANCOMMENTPHOTO")
+    @Column(name = "cancommentphoto")
     private Boolean cancommentphoto;
-    @Column(name = "CANDOWNLOADPHOTO")
+    @Column(name = "candownloadphoto")
     private Boolean candownloadphoto;
-    @OneToMany(mappedBy = "idPermisoFotografia")
+    @Column(name = "canfavoritephoto")
+    private Boolean canfavoritephoto;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "permisoFotografiaidpermisofotografia")
     private Collection<Fotografia> fotografiaCollection;
 
     public PermisoFotografia() {
@@ -63,14 +65,6 @@ public class PermisoFotografia implements Serializable {
         this.idPermisoFotografia = idPermisoFotografia;
     }
 
-    public Boolean getCansharephoto() {
-        return cansharephoto;
-    }
-
-    public void setCansharephoto(Boolean cansharephoto) {
-        this.cansharephoto = cansharephoto;
-    }
-
     public Boolean getCancommentphoto() {
         return cancommentphoto;
     }
@@ -85,6 +79,14 @@ public class PermisoFotografia implements Serializable {
 
     public void setCandownloadphoto(Boolean candownloadphoto) {
         this.candownloadphoto = candownloadphoto;
+    }
+
+    public Boolean getCanfavoritephoto() {
+        return canfavoritephoto;
+    }
+
+    public void setCanfavoritephoto(Boolean canfavoritephoto) {
+        this.canfavoritephoto = canfavoritephoto;
     }
 
     @XmlTransient

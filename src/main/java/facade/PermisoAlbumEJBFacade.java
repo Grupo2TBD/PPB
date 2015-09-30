@@ -5,33 +5,26 @@
  */
 package facade;
 
-/**
- *
- * @author ian
- */
-
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import model.PermisoAlbum;
 
+/**
+ *
+ * @author sebastian
+ */
 @Stateless
-public class PermisoAlbumEJBFacade extends AbstractFacade<PermisoAlbum>{
-
-        @PersistenceContext(unitName = "ian")
+public class PermisoAlbumEJBFacade extends AbstractFacade<PermisoAlbum> {
+    
+     @PersistenceContext(unitName = "ian")
 	private EntityManager em;
     public PermisoAlbumEJBFacade() {
         super(PermisoAlbum.class);
     }
     
-    
-    
-
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-    
 }

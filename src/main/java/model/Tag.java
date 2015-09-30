@@ -13,9 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -25,10 +23,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Entity
-@Table(name = "TAG")
+@Table(name = "Tag")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tag.findAll", query = "SELECT t FROM Tag t"),
@@ -39,16 +37,13 @@ public class Tag implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_TAG")
+    @Column(name = "id_tag")
     private Integer idTag;
-    @Size(max = 20)
-    @Column(name = "NOMBRE_TAG")
+    @Size(max = 45)
+    @Column(name = "nombre_tag")
     private String nombreTag;
     @ManyToMany(mappedBy = "tagCollection")
     private Collection<Fotografia> fotografiaCollection;
-    @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER")
-    @ManyToOne(optional = false)
-    private Usuario idUser;
 
     public Tag() {
     }
@@ -80,14 +75,6 @@ public class Tag implements Serializable {
 
     public void setFotografiaCollection(Collection<Fotografia> fotografiaCollection) {
         this.fotografiaCollection = fotografiaCollection;
-    }
-
-    public Usuario getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(Usuario idUser) {
-        this.idUser = idUser;
     }
 
     @Override

@@ -21,27 +21,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Entity
-@Table(name = "FAVORITO_ALBUM")
+@Table(name = "Favorito_Album")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "FavoritoAlbum.findAll", query = "SELECT f FROM FavoritoAlbum f"),
-    @NamedQuery(name = "FavoritoAlbum.findByIdAlbum", query = "SELECT f FROM FavoritoAlbum f WHERE f.favoritoAlbumPK.idAlbum = :idAlbum"),
-    @NamedQuery(name = "FavoritoAlbum.findByIdUser", query = "SELECT f FROM FavoritoAlbum f WHERE f.favoritoAlbumPK.idUser = :idUser"),
-    @NamedQuery(name = "FavoritoAlbum.findByFechaFavoritoAlbum", query = "SELECT f FROM FavoritoAlbum f WHERE f.fechaFavoritoAlbum = :fechaFavoritoAlbum")})
+    @NamedQuery(name = "FavoritoAlbum.findByFechaFavoritoAlbum", query = "SELECT f FROM FavoritoAlbum f WHERE f.fechaFavoritoAlbum = :fechaFavoritoAlbum"),
+    @NamedQuery(name = "FavoritoAlbum.findByUsuarioiduser", query = "SELECT f FROM FavoritoAlbum f WHERE f.favoritoAlbumPK.usuarioiduser = :usuarioiduser"),
+    @NamedQuery(name = "FavoritoAlbum.findByAlbumidalbum", query = "SELECT f FROM FavoritoAlbum f WHERE f.favoritoAlbumPK.albumidalbum = :albumidalbum")})
 public class FavoritoAlbum implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected FavoritoAlbumPK favoritoAlbumPK;
-    @Column(name = "FECHA_FAVORITO_ALBUM")
+    @Column(name = "fecha_favorito_album")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaFavoritoAlbum;
-    @JoinColumn(name = "ID_ALBUM", referencedColumnName = "ID_ALBUM", insertable = false, updatable = false)
+    @JoinColumn(name = "Album_id_album", referencedColumnName = "id_album", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Album album;
-    @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER", insertable = false, updatable = false)
+    @JoinColumn(name = "Usuario_id_user", referencedColumnName = "id_user", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Usuario usuario;
 
@@ -52,8 +52,8 @@ public class FavoritoAlbum implements Serializable {
         this.favoritoAlbumPK = favoritoAlbumPK;
     }
 
-    public FavoritoAlbum(int idAlbum, int idUser) {
-        this.favoritoAlbumPK = new FavoritoAlbumPK(idAlbum, idUser);
+    public FavoritoAlbum(int usuarioiduser, int albumidalbum) {
+        this.favoritoAlbumPK = new FavoritoAlbumPK(usuarioiduser, albumidalbum);
     }
 
     public FavoritoAlbumPK getFavoritoAlbumPK() {

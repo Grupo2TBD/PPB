@@ -21,29 +21,29 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ian
+ * @author sebastian
  */
 @Entity
-@Table(name = "FAVORITO_FOTOGRAFIA")
+@Table(name = "Favorito_Fotografia")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "FavoritoFotografia.findAll", query = "SELECT f FROM FavoritoFotografia f"),
-    @NamedQuery(name = "FavoritoFotografia.findByIdUser", query = "SELECT f FROM FavoritoFotografia f WHERE f.favoritoFotografiaPK.idUser = :idUser"),
-    @NamedQuery(name = "FavoritoFotografia.findByIdPhoto", query = "SELECT f FROM FavoritoFotografia f WHERE f.favoritoFotografiaPK.idPhoto = :idPhoto"),
-    @NamedQuery(name = "FavoritoFotografia.findByFechaFavorito", query = "SELECT f FROM FavoritoFotografia f WHERE f.fechaFavorito = :fechaFavorito")})
+    @NamedQuery(name = "FavoritoFotografia.findByFechaFavorito", query = "SELECT f FROM FavoritoFotografia f WHERE f.fechaFavorito = :fechaFavorito"),
+    @NamedQuery(name = "FavoritoFotografia.findByUsuarioiduser", query = "SELECT f FROM FavoritoFotografia f WHERE f.favoritoFotografiaPK.usuarioiduser = :usuarioiduser"),
+    @NamedQuery(name = "FavoritoFotografia.findByFotografiaidphoto", query = "SELECT f FROM FavoritoFotografia f WHERE f.favoritoFotografiaPK.fotografiaidphoto = :fotografiaidphoto")})
 public class FavoritoFotografia implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected FavoritoFotografiaPK favoritoFotografiaPK;
-    @Column(name = "FECHA_FAVORITO")
+    @Column(name = "fecha_favorito")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaFavorito;
-    @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Usuario usuario;
-    @JoinColumn(name = "ID_PHOTO", referencedColumnName = "ID_PHOTO", insertable = false, updatable = false)
+    @JoinColumn(name = "Fotografia_id_photo", referencedColumnName = "id_photo", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Fotografia fotografia;
+    @JoinColumn(name = "Usuario_id_user", referencedColumnName = "id_user", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Usuario usuario;
 
     public FavoritoFotografia() {
     }
@@ -52,8 +52,8 @@ public class FavoritoFotografia implements Serializable {
         this.favoritoFotografiaPK = favoritoFotografiaPK;
     }
 
-    public FavoritoFotografia(int idUser, int idPhoto) {
-        this.favoritoFotografiaPK = new FavoritoFotografiaPK(idUser, idPhoto);
+    public FavoritoFotografia(int usuarioiduser, int fotografiaidphoto) {
+        this.favoritoFotografiaPK = new FavoritoFotografiaPK(usuarioiduser, fotografiaidphoto);
     }
 
     public FavoritoFotografiaPK getFavoritoFotografiaPK() {
@@ -72,20 +72,20 @@ public class FavoritoFotografia implements Serializable {
         this.fechaFavorito = fechaFavorito;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     public Fotografia getFotografia() {
         return fotografia;
     }
 
     public void setFotografia(Fotografia fotografia) {
         this.fotografia = fotografia;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
