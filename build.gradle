@@ -15,6 +15,14 @@ dependencies{
 	compile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
 	compile 'mysql:mysql-connector-java:5.1.30'
         compile 'javax.json:javax.json-api:1.0'
+        compile 'commons:commons-io:2.4'
+        compile 'google:google-collect:1.0'
+        compile 'google:google-common'
+        compile 'weka:libsvm'
+        compile 'weka:weka'
+        compile 'jersey:jersey-multipart:1.19'
+        compile 'jersey:jersey-server:1.19'
+        compile 'jersey:jersey-core:1.11'
 }
 
 sourceSets.all {
